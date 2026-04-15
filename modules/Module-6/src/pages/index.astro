@@ -1,6 +1,6 @@
 ---
 import "../styles/global.css";
-import courseHero from "../images/course-hero.jpg";
+import courseHero from "../images/mod-6-hero.jpg";
 import topTipIcon from "../images/top-tip.svg?url";
 
 function svgToDataUri(svg) {
@@ -57,6 +57,8 @@ const wrapUp = {
   closing: "You're ready. Go help customers feel confident, comfortable, and cared for - one product at a time.",
   downloadLabel: "Download the product information here",
 };
+
+const sectionPadding = "px-4 py-5 md:px-8 md:py-8 lg:px-10";
 ---
 
 <html lang="en">
@@ -110,46 +112,36 @@ const wrapUp = {
       <section class="relative mt-4 overflow-hidden rounded-[1rem] border border-[#e3ddd7] bg-[#f6f1ec] shadow-[0_14px_36px_rgba(56,39,27,0.05)]">
         <img src={courseHero.src} alt="Beauty course hero image" class="absolute inset-0 h-full w-full object-cover object-center md:inset-y-0 md:left-auto md:right-0 md:w-[50%] md:object-right" />
         <div class="absolute inset-0 bg-[linear-gradient(180deg,_rgba(246,241,236,0.6)_0%,_rgba(246,241,236,1)_100%)] md:inset-y-0 md:left-auto md:right-[10%] md:w-[40%] md:bg-[linear-gradient(90deg,_#f6f1ec_0%,_rgba(246,241,236,0)_100%)]"></div>
-        <div class="relative px-4 py-10 md:px-10 md:py-20 lg:px-12 lg:py-24">
+        <div class={`relative ${sectionPadding} md:py-20 lg:py-24`}>
           <img src={OBC_LOGO} alt="Beauty Co. logo" class="h-[4.8rem] w-auto md:h-24" />
           <div class="mt-6 inline-flex items-center gap-3 rounded-full border border-[#e6ddd5] bg-white/88 px-4 py-2 backdrop-blur md:mt-8">
             <span class="text-xs font-semibold uppercase tracking-[0.22em] text-[#8f7968]">Module 6</span>
           </div>
-          <h1 class="mt-10 max-w-[42rem] text-4xl font-semibold tracking-[-0.03em] text-[#2f2924] md:mt-12 md:text-6xl">Course wrap-up: You're ready to consult with confidence</h1>
+          <h1 class="mt-10 max-w-[42rem] text-4xl font-semibold tracking-[-0.03em] text-[#2f2924] md:mt-12 md:text-6xl">Wrap-up</h1>
         </div>
       </section>
 
       <section class="mt-6 space-y-6">
-        <article id="wrap-up" class="rounded-[1rem] border border-[#e3ddd7] bg-[#fbfaf8] shadow-[0_14px_36px_rgba(56,39,27,0.05)]">
-          <div class="px-4 py-5 md:px-8 md:py-8 lg:px-10">
-            <div class="rounded-[0.95rem] border border-[#e7dfd8] bg-white p-5 md:p-7">
-              <p class="inline-flex rounded-full border border-[#e8e0d8] bg-[#faf8f6] px-4 py-2 text-sm font-semibold uppercase tracking-[0.16em] text-[#8f7968]">{wrapUp.label}</p>
-              <h2 class="mt-5 text-[1.9rem] font-semibold leading-[1.15] tracking-[-0.03em] text-[#2f2924] md:text-[2.5rem]">{wrapUp.title}</h2>
-              <div class="mt-5 space-y-4 text-[1.125rem] leading-8 text-[#4e4741]">
-                {wrapUp.intro.map((paragraph) => <p>{paragraph}</p>)}
-              </div>
-            </div>
+        <article id="wrap-up" class:list={["rounded-[1rem] border border-[#e3ddd7] bg-[#fbfaf8] shadow-[0_14px_36px_rgba(56,39,27,0.05)]", sectionPadding]}>
+          <h2 class="text-[30px] font-semibold leading-[1.15] tracking-[-0.03em] text-[#2f2924]">{wrapUp.title}</h2>
+          <div class="mt-5 space-y-4 text-[1.125rem] leading-8 text-[#4e4741]">
+            {wrapUp.intro.map((paragraph) => <p>{paragraph}</p>)}
           </div>
         </article>
 
-        <div class="grid gap-4 md:grid-cols-2">
-          <article id="final-tip" class="rounded-[0.95rem] border border-[#c9bfaa] p-4 text-[#2f2924] md:p-5" style="background: linear-gradient(135deg, rgba(255,255,255,0.96) 0%, rgba(210,183,166,0.15) 100%);">
-            <div class="flex items-center gap-2 text-[1.5rem] font-semibold tracking-[-0.02em] text-[#6e6054]">
-              <img src={topTipIcon} alt="" aria-hidden="true" class="w-auto shrink-0" style="height:1.1em;" />
-              <p class="leading-none">{wrapUp.finalTipTitle}</p>
-            </div>
-            <p class="mt-4 text-[1.125rem] leading-8 text-[#4e4741]">{wrapUp.finalTipIntro}</p>
-            <ul class="mt-4 list-disc space-y-2 pl-5 text-[1.125rem] leading-8 text-[#4e4741] marker:text-[#605248]">
-              {wrapUp.finalTipQuestions.map((question) => <li>{question}</li>)}
-            </ul>
-          </article>
+        <article id="final-tip" class:list={["rounded-[0.95rem] border border-[#c9bfaa] text-[#2f2924]", sectionPadding]} style="background: linear-gradient(135deg, rgba(255,255,255,0.96) 0%, rgba(210,183,166,0.15) 100%);">
+          <div class="flex items-center gap-2 text-[1.5rem] font-semibold tracking-[-0.02em] text-[#6e6054]">
+            <img src={topTipIcon} alt="" aria-hidden="true" class="w-auto shrink-0" style="height:1.1em;" />
+            <p class="leading-none">{wrapUp.finalTipTitle}</p>
+          </div>
+          <p class="mt-4 text-[1.125rem] leading-8 text-[#4e4741]">{wrapUp.finalTipIntro}</p>
+          <ul class="mt-4 list-disc space-y-2 pl-5 text-[1.125rem] leading-8 text-[#4e4741] marker:text-[#605248]">
+            {wrapUp.finalTipQuestions.map((question) => <li>{question}</li>)}
+          </ul>
+          <p class="mt-4 text-[18px] font-bold leading-8 text-[#4e4741]">{wrapUp.finalTipClose}</p>
+        </article>
 
-          <article class="rounded-[0.95rem] bg-white/50 p-4 shadow-[0_10px_24px_rgba(56,39,27,0.035)] md:p-5">
-            <p class="text-[1.5rem] font-semibold leading-[1.5] tracking-[-0.02em] text-[#2f2924]">{wrapUp.finalTipClose}</p>
-          </article>
-        </div>
-
-        <article class="rounded-[0.95rem] border border-transparent p-5 text-white md:p-6" style="background: linear-gradient(135deg, #8d7260 0%, #d2b7a6 100%);">
+        <article class:list={["rounded-[0.95rem] border border-transparent text-white", sectionPadding]} style="background: linear-gradient(135deg, #8d7260 0%, #d2b7a6 100%);">
           <h3 class="text-[1.8rem] font-semibold leading-[1.2] tracking-[-0.03em] md:text-[2.2rem]">You're ready.</h3>
           <p class="mt-4 max-w-[54rem] text-[1.125rem] leading-8 text-white/95">{wrapUp.closing}</p>
           <div id="download" class="mt-6 inline-flex rounded-full border border-white/25 bg-white/12 px-5 py-3 text-sm font-semibold tracking-[0.02em] text-white">
