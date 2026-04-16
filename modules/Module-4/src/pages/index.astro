@@ -7,15 +7,6 @@ import lesson1BannerImage from "../images/lesson-1-banner-inage.jpg";
 import lipPencilProductImage1 from "../images/product-lip-pencil-1.jpg";
 import lipPencilProductImage2 from "../images/product-lip-pencil-2.jpg";
 import correctorBannerImage from "../images/lesson-2-banner-inage.jpg";
-import powderProductImage1 from "../images/OBC-loose-powder-1.png";
-import powderProductImage2 from "../images/OBC-loose-powde-3.png";
-import powderBannerImage from "../images/obc-loose-powder-coverimg.jpg";
-import blushProductImage1 from "../images/OBC-blush-duo-2-1.png";
-import blushProductImage2 from "../images/OBC-blush-duo-2-2.png";
-import blushBannerImage from "../images/obc-blush-due-2-coverimg.jpg";
-import bronzerProductImage1 from "../images/OBC-bronzer-1.png";
-import bronzerProductImage2 from "../images/OBC-bronzer-2.png";
-import bronzerBannerImage from "../images/obc-the-bronzer-coverimg.jpg";
 import topTipIcon from "../images/top-tip.svg?url";
 
 function stripNumbering(text) {
@@ -194,589 +185,231 @@ function softProduct(accent, soft, deep, shape) {
 }
 
 const navItems = [
-  { href: "#primer", label: "The lipstick" },
-  { href: "#corrector", label: "Lip pencil" },
-];
-
-const allLessons = [
-  {
-    id: "primer",
-    lesson: "Lesson 1",
-    title: "The lipstick",
-    visual: "primer",
-    theme: { accent: "#d2b7a6", soft: "#f4efea", deep: "#8d7260" },
-    bannerImage: lesson1BannerImage,
-    productImages: [lipstickProductImage1, lipstickProductImage2],
-    productName: "1.1) OBC Primer",
-    looksLike: "What it looks like:",
-    overviewHeading: "1.1.1) Product Overview",
-    overview: [
-      "The ultimate blend of skin care and a perfecting primer.",
-      "A fresh and light formula containing Niacinamide and Hyaluronic acid, that help to brighten, firm and plump the skin, while functioning as a primer to provide adhesion for makeup – all with a silky finish.",
-      "Skincare benefits over time include a strengthened skin barrier, more elastic, firm and plump skin, as well as improved skin hydration.",
-    ],
-    sections: [
-      { heading: "1.1.2) What it does", bullets: ["Prepares the skin for make-up.", "Helps make-up last longer by helping it grip to the skin.", "Brightens, firms, and plumps the skin over time.", "Leaves the skin feeling smooth with a silky finish."] },
-      { heading: "1.1.3) Who is it for", label: "Customers who:", bullets: ["Want their make-up to last longer.", "Want smoother, fresher-looking skin.", "Who like skincare benefits in their make-up routine.", "Want a light, non-heavy feel on the skin."] },
-      { heading: "1.1.4) How to sell", bullets: ["“This helps your make-up last longer and keeps your skin looking smooth.”", "“It works like skincare and a primer in one step.”", "“It’s great if you want a fresh, silky base before applying make-up.”"] },
-    ],
-    topTip: "“It contains ingredients that help hydrate and brighten the skin, so your skin looks better even without make-up.”",
-    assessment: {
-      title: "Test your knowledge",
-      scenario: "Learning Scenario (4 decisions): “My make-up doesn’t last… and I don’t want anything heavy”",
-      scene: "Set the scene",
-      customerIntro: "A customer says:",
-      customerQuote: "“My make-up doesn’t last the whole day. But I don’t want anything that feels heavy on my skin.”",
-      goal: "Your goal: Recommend the right product and explain it clearly.",
-      button: "Click Here",
-      quiz: [
-        {
-          question: "Decision 1: Identify the customer’s main need. What is the customer mainly asking for?",
-          options: [
-            "A. A product that changes their skin tone",
-            "B. A product that removes make-up",
-            "C. A light product that helps make-up last longer",
-            "D. A product that adds heavy coverage",
-          ],
-          correct: 2,
-          feedback: "Why: They want longer wear, but a light feel.",
-        },
-        {
-          question: "Decision 2: Choose the right product. Which product best matches this need?",
-          options: [
-            "A. OBC THE LOOSE POWDER",
-            "B. OBC THE FLAWLESS CORRECTOR",
-            "C. OBC THE PRIMER",
-            "D. OBC THE BLUSH DUO",
-          ],
-          correct: 2,
-          feedback: "Why: OBC THE PRIMER is described as a blend of skincare and a perfecting primer, and it provides adhesion for make-up.",
-        },
-        {
-          question: "Decision 3: Explain what it does (plain language). The customer asks: “What will it do for me?” What’s the best answer?",
-          options: [
-            "A. It contains ingredients and improves elasticity.",
-            "B. It’s only for dry skin.",
-            "C. It helps your make-up grip to your skin so it lasts longer, and it feels smooth with a silky finish.",
-            "D. It replaces foundation.",
-          ],
-          correct: 2,
-          feedback: "Why: The primer is meant to help make-up adhere (grip), while leaving the skin smooth with a silky finish.",
-        },
-        {
-          question: "Decision 4: Close the recommendation. Choose the best closing line.",
-          options: [
-            "A. This will fix your skin permanently.",
-            "B. This is expensive, but it’s worth it.",
-            "C. This works like skincare and a primer in one step—great if you want make-up to last without feeling heavy.",
-            "D. Use this only at night.",
-          ],
-          correct: 2,
-          feedback: "Why: OBC THE PRIMER is positioned as skincare + primer, with a fresh, light feel and make-up performance benefits.",
-        },
-      ],
-    },
-  },
-  {
-    id: "corrector",
-    lesson: "Lesson 2",
-    title: "The Flawless Corrector",
-    visual: "corrector",
-    theme: { accent: "#e4b6aa", soft: "#f7f1ed", deep: "#a67867" },
-    bannerImage: correctorBannerImage,
-    productImages: [lipPencilProductImage1, lipPencilProductImage2],
-    productName: "2.1) OBC the flawless corrector",
-    looksLike: "What it looks like:",
-    overviewHeading: "2.1.1) Product Overview",
-    overview: [
-      "A creamy, lightweight emulsion based on two innovative technologies: A mix of oils that instantly melt into the skin, for an immediate skincare fix; and treated pigments, resulting in the perfect corrective concealer.",
-      "Available in two shades - orange and pink - that effectively correct dark circles and dyschromia",
-    ],
-    overviewBullets: ["Orange to correct grey-green dyschromia,", "Pink to correct blue-violet dyschromia."],
-    overviewExtraParagraphs: ["Is delicate on the skin, with a soft and velvety finish for a second-skin effect."],
-    sections: [
-      { heading: "2.1.2) What it does", bullets: ["Corrects dark circles and uneven skin tone.", "Melts into the skin for a natural, second-skin finish.", "Helps neutralise unwanted colour under the eyes or on the face.", "Feels light and comfortable on the skin with a soft, velvety finish."] },
-      { heading: "2.1.3) Who is it for", label: "Customers:", bullets: ["With dark circles under the eyes.", "With uneven skin tone or discolouration (dyschromia).", "Who want natural-looking correction, not heavy coverage.", "Who want a lightweight, comfortable feel on the skin."] },
-      { heading: "2.1.4) Shade guidance", bullets: ["Orange: Corrects grey-green tones", "Pink: Corrects blue-violet tones (common under the eyes)"] },
-      { heading: "2.1.5) How to sell", bullets: ["“This helps cancel out dark circles before you apply concealer.”", "“It melts into the skin, so it looks natural, not heavy.”", "“You use this first to correct the colour, then apply concealer on top.”"] },
-      { heading: "2.1.6) When to recommend", paragraph: "Recommend this when a customer says concealer alone doesn’t fully cover their dark circles." },
-    ],
-    topTip: "If the darkness looks more blue or purple, choose pink. If it looks dull or grey, choose orange.",
-    assessment: {
-      title: "Test your knowledge",
-      scenario: "Learning Scenario (4 decisions): “My concealer still doesn’t cover my dark circles”",
-      scene: "Set the scene",
-      customerIntro: "A customer says:",
-      customerQuote: "“I’ve tried concealer, but my dark circles still show through. I want it to look natural, not heavy.”",
-      goal: "Your goal: Pick the right corrector shade, explain what it does, and guide how to use it.",
-      button: "Click Here",
-      quiz: [
-      {
-          question: "Decision 1: Identify the real issue: What is the customer struggling with?",
-          options: [
-            "A. Their foundation is too oily",
-            "B. Their lipstick fades too quickly",
-            "C. Concealer alone isn’t cancelling the dark colour ",
-            "D. Their blush is too bright",
-          ],
-          correct: 3,
-          feedback: "Why: They’re saying the darkness still shows even with concealer, which is a colour‑correction problem.",
-        },
-        {
-          question: "Decision 2: Choose the right product. Which product best solves this problem?",
-          options: [
-            "A. OBC THE LOOSE POWDER",
-            "B. OBC THE PRIMER",
-            "C. OBC THE FLAWLESS CORRECTOR ",
-            "D. OBC THE BLUSH DUO 2",
-          ],
-          correct: 3,
-          feedback: "Why: OBC THE FLAWLESS CORRECTOR is designed to correct dark circles and uneven skin tone (dyschromia) with a natural, second‑skin finish.",
-        },
-        {
-          question: "Decision 3: Pick the correct shade. You look at the darkness and it appears more blue‑violet. Which shade do you recommend?",
-          options: [
-            "A. Translucent",
-            "B. Banana",
-            "C. Orange",
-            "D. Pink",
-          ],
-          correct: 4,
-          feedback: "Why: Pink is used to correct blue‑violet dyschromia (commonly under the eyes).",
-        },
-        {
-          question: "Decision 4: Explain how to use it (simple steps) The customer asks: “Do I use this instead of concealer?” What’s the best response?",
-          options: [
-            "A. “Yes, replace concealer completely.”",
-            "B. “Use it after powder.”",
-            "C. “Use this first to correct the colour, then apply concealer on top.”",
-            "D. “Mix it into foundation.”",
-          ],
-          correct: 3,
-          feedback: "Why: The corrector is meant to neutralise the colour first, so concealer looks more even and natural.",
-        },
-      ],
-    },
-  },
-  {
-    id: "powder",
-    lesson: "Lesson 3",
-    title: "Loose powder",
-    visual: "powder",
-    theme: { accent: "#d9c29c", soft: "#f8f3ed", deep: "#9a805b" },
-    bannerImage: powderBannerImage,
-    productImages: [powderProductImage1, powderProductImage2],
-    productName: "3.1) OBC loose powder",
-    looksLike: "What it looks like:",
-    overviewHeading: "3.1.1) Product Overview",
-    overview: [
-      "A loose powder coming in two universal shades – banana and translucent - that match any complexion.",
-      "Has a smooth, silky texture while also containing spherical powders for an even application,",
-      "The translucent version is ideal to set foundation, making it last longer and giving the complexion an even appearance.",
-      "The Banana version is the perfect product to finish a more sculpted and shaped look, as well as acting as a colour corrector for grey or dull areas of the face, especially around the eyes.",
-      "The Loose Powder helps to absorb and regulate excess sebum, with a selection of raw materials to promote the physiological hydration of the skin.",
-      "Can be applied with a powder puff for a more even finish or with a powder brush for a natural look and quick touch-up.",
-    ],
-    sections: [
-      { heading: "3.1.2) What is does", bullets: ["Sets make-up and helps it last longer.", "Gives the skin an even, smooth appearance.", "Absorbs and controls excess oil (sebum).", "Helps keep the skin hydrated while reducing shine.", "Applies evenly with a soft, silky finish."] },
-      { heading: "3.1.3) Who is it for", label: "Customers who:", bullets: ["Want their foundation to last longer.", "Get oily or shiny during the day.", "Want a smooth, finished look.", "Want either a natural finish or a more sculpted look."] },
-      { heading: "3.1.4) Shade Guidance", subsections: [{ label: "Translucent:", bullets: ["Sets foundation", "Gives an even, natural finish", "Works for all skin tones"] }, { label: "Banana:", bullets: ["Finishes a more sculpted, shaped look.", "Helps brighten and correct dull or grey areas.", "Especially good around the eyes."] }] },
-      { heading: "3.1.4) How to sell", bullets: ["“This sets your make-up and helps it last longer.”", "“It keeps shine under control without drying your skin.”", "“You can wear it natural or more sculpted, depending on how you apply it.”"] },
-      { heading: "3.1.5) When to recommend", paragraph: "Recommend this when a customer says their make-up gets shiny, moves, or doesn’t last the whole day." },
-    ],
-    topTip: "Use banana to brighten and sculpt. Use translucent to set and smooth.",
-    assessment: {
-      title: "Test your knowledge",
-      scenario: "Learning Scenario: “My make-up gets shiny by lunchtime”",
-      scene: "Set the scene",
-      customerIntro: "You’re on the shop floor when a customer says:",
-      customerQuote: "“My foundation looks fine in the morning, but by midday I’m shiny and my make-up moves.”",
-      goal: "Your goal: Recommend the right powder, explain the benefit clearly, and help the customer choose the correct shade and application.",
-      button: "Click Here",
-      quiz: [
-      {
-          question: "Decision 1: Identify the main problem. What is the customer’s key concern?",
-          options: [
-            "A. Their foundation colour is wrong",
-            "B. Their skin feels dry",
-            "C. Their make‑up gets shiny and doesn’t last ",
-            "D. They want heavier coverage",
-          ],
-          correct: 3,
-          feedback: "Why: The customer mentions shine and make‑up movement during the day.",
-        },
-        {
-          question: "Decision 2: Choose the right product. Which product best solves this problem?",
-          options: [
-            "A. Primer",
-            "B. Corrector",
-            "C. OBC The Loose Powder",
-            "D. Bronzer",
-          ],
-          correct: 3,
-          feedback: "Why: The loose powder sets make‑up, absorbs excess oil, and helps it last longer.",
-        },
-        {
-          question: "Decision 3: Select the right shade. The customer adds: “I want my skin to look natural, not heavy.” Which shade should you recommend?",
-          options: [
-            "A. Banana",
-            "B. Translucent",
-            "C. Pink",
-            "D. Orange",
-          ],
-          correct: 2,
-          feedback: "Translucent sets foundation and gives an even, natural finish for all skin tones.",
-        },
-        {
-          question: "Decision 4: Explain how to use it. The customer asks: “How should I apply it?” What is the best response?",
-          options: [
-            "A. “Only use your fingers.”",
-            "B. “Apply a thick layer everywhere.”",
-            "C. “Use a puff for a more even finish, or a brush for a natural look and quick touch‑ups.” ",
-            "D. “Mix it with moisturiser.”",
-          ],
-          correct: 3,
-          feedback: "Why: This explains both application options clearly and simply.",
-        },
-      ],
-    },
-  },
-  {
-    id: "blush",
-    lesson: "Lesson 4",
-    title: "Blush duo 2",
-    visual: "blush",
-    theme: { accent: "#eca3b8", soft: "#f9eff2", deep: "#a45d73" },
-    bannerImage: blushBannerImage,
-    productImages: [blushProductImage1, blushProductImage2],
-    productName: "4.1) OBC blush duo 2",
-    looksLike: "What it looks like:",
-    overviewHeading: "4.1.1) Product Overview",
-    overview: [
-      "Blush takes on a new visual and sensory experience in the form of two complementary formulas, each with unique finish and performance.",
-      "The Blush Duo also takes care of the skin by maintaining the physiological hydration and adding a delicate barrier effect.",
-    ],
-    sections: [
-      { label: "Cream Blush", bullets: ["A creamy, smoothing and luminous formula with amino acid derivatives for a soft, silky finish and perfect adhesion to skin.", "Contains ceramides with moisturizing and anti-ageing properties as well as Hyaluronic acid.", "A light, sensorial and comfortable texture with a luminous, natural glow finish."] },
-      { label: "Compact Powder Blush", bullets: ["A light, impalpable and velvety compact powder with a matte, soft and silky finish.", "Contains a mix of emollient oils and waxes, making it easy to blend."] },
-      { heading: "4.1.2) What it does", bullets: ["Gives a healthy flush of colour to the cheeks.", "Offers two finishes in one product: luminous cream and soft matte powder.", "Helps keep the skin hydrated and comfortable.", "Leaves the skin looking smooth, fresh, and naturally glowing."] },
-      { heading: "4.1.3) What’s it for", label: "Customers who:", bullets: ["Want a natural, healthy glow.", "Like flexibility (cream and powder in one product).", "Want blush that feels comfortable on the skin.", "Want either a fresh glow or a more defined finish."] },
-      { heading: "4.1.4) How to sell", subsections: [{ label: "Cream Blush", bullets: ["Gives a luminous, natural glow", "Melts into the skin for a smooth, silky finish", "Feels light and comfortable on the skin"], paragraph: "Sell it as: “Perfect for a fresh, glowing look.”" }, { label: "Compact Powder Blush", bullets: ["Gives a soft, matte finish", "Easy to blend for a smooth result", "Helps add definition and polish"], paragraph: "Sell it as “Great to finish the look or add extra definition.”" }] },
-      { heading: "4.1.5) When to Recommend", paragraph: "Recommend this when a customer wants a healthy glow with the option to build or set their look." },
-    ],
-    assessment: {
-      title: "Test your knowledge",
-      scenario: "Learning Scenario: “I want a healthy glow, not too much make-up”",
-      scene: "Set the scene",
-      customerIntro: "A customer says:",
-      customerQuote: "“I want my skin to look fresh and healthy. I don’t want anything heavy, but I still want some colour.”",
-      goal: "Your goal: Recommend the right blush option and explain how to use it.",
-      button: "Click Here",
-      quiz: [
-      {
-          question: "Decision 1: Identify the customer’s goal. What is the customer mainly looking for?",
-          options: [
-            "A. Heavy contour",
-            "B. Full coverage foundation",
-            "C. A natural, healthy glow",
-            "D. Long‑wear lipstick",
-          ],
-          correct: 3,
-          feedback: "Why: The customer wants a fresh, healthy look, not heavy make‑up",
-        },
-        {
-          question: "Decision 2: Choose the right product. Which product best meets this need?",
-          options: [
-            "A. Loose Powder",
-            "B. Bronzer",
-            "C. OBC The Blush Duo 2 ",
-            "D. Corrector",
-          ],
-          correct: 3,
-          feedback: "Why: The Blush Duo offers both a luminous cream blush and a soft matte powder blush in one product.",
-        },
-        {
-          question: "Decision 3: Select the best formula to start with. The customer adds: “I like a fresh, glowing look.” Which option should you recommend first?",
-          options: [
-            "A. Compact powder blush",
-            "B. Cream blush",
-            "C. Loose powder",
-            "D. Highlighter",
-          ],
-          correct: 2,
-          feedback: "The cream blush gives a luminous, natural glow and feels light and comfortable on the skin.",
-        },
-        {
-          question: "Decision 4: Explain how to build or finish the look. The customer asks: “Can I make it last longer or look more defined?” What is the best response?",
-          options: [
-            "A. “Apply more foundation.”",
-            "B. “Only use the cream.”",
-            "C. “Use the cream blush for glow, then add the powder blush to set or add definition.” ",
-            "D. “Use powder all over the face.”",
-          ],
-          correct: 3,
-          feedback: "Why: The powder blush helps set the look and add polish or definition.",
-        },
-      ],
-    },
-  },
-  {
-    id: "bronzer",
-    lesson: "Lesson 5",
-    title: "The Bronzer",
-    visual: "bronzer",
-    theme: { accent: "#d58f62", soft: "#f8f1ed", deep: "#9a633e" },
-    bannerImage: bronzerBannerImage,
-    productImages: [bronzerProductImage1, bronzerProductImage2],
-    productName: "5.1) OBC bronzer",
-    overviewHeading: "5.1.1) Product Overview",
-    overview: [
-      "An innovative universal bronzer formula that can be used to create a radiant, sun-kissed glow to the skin, with a velvet smooth touch and natural glowing finish.",
-      "Its light texture makes it bendable and buildable for a more intense sculpted finish or can be simply applied to bare skin for a natural tanned look.",
-      "Contains Hoya Lacunosa Flower Extract which is rich in bioactive compounds and is known for its skin-conditioning properties. Hoya Lacunosa flower extract also helps to soothe, hydrate, and improve skin texture, while also enhancing the skin’s natural barrier and promoting a radiant and smooth complexion overall.",
-      "The Bronzer contains spherical powders that allow for a homogenous and smooth application and emollient oils to maintain the physiological hydration of the skin.",
-    ],
-    sections: [
-      { heading: "5.1.2) What it does", bullets: ["Gives the skin a radiant, sun-kissed glow", "Adds warmth and definition with a natural, glowing finish", "Applies smoothly and evenly for a soft, velvety feel", "Helps keep the skin hydrated and comfortable"] },
-      { heading: "5.1.3) How to use it", subsections: [{ label: "Light application:", bullets: ["Apply to bare skin for a natural, tanned look"] }, { label: "Buildable application:", bullets: ["Build it up for a more sculpted, defined finish"] }] },
-      { heading: "5.1.4) Who is it for", label: "Customers who:", bullets: ["Want a healthy, sun-kissed look.", "Like a natural glow or a more sculpted finish.", "Want bronzer that blends easily.", "Want make-up that still feels good on the skin."] },
-      { heading: "5.1.5) How to sell", bullets: ["“This gives your skin a natural, sun-kissed glow.”", "“You can keep it soft and natural or build it for more definition.”", "“It blends easily and doesn’t look patchy or heavy.”"] },
-      { heading: "5.1.6) When to Recommend", paragraph: "Recommend this when a customer wants warmth, glow, or light contouring without harsh lines." },
-    ],
-    topTip: "Start light and build slowly — this bronzer is designed to be buildable.",
-    assessment: {
-      title: "Test your knowledge",
-      scenario: "Learning Scenario: “I want a natural glow, not harsh contour”",
-      scene: "Set the scene",
-      customerIntro: "A customer says:",
-      customerQuote: "“I want my skin to look warm and healthy, but I don’t want harsh contour lines or anything heavy.”",
-      goal: "Your goal: Recommend the right product, explain how it looks on the skin, and guide how to apply it.",
-      button: "Click Here",
-      quiz: [
-      {
-          question: "Decision 1: Identify the customer’s goal. What is the customer mainly looking for?",
-          options: [
-            "A. Full coverage make‑up",
-            "B. Matte foundation",
-            "C. A natural, sun‑kissed glow ",
-            "D. Heavy contour",
-          ],
-          correct: 3,
-          feedback: "Why: The customer wants warmth and glow, not harsh definition.",
-        },
-        {
-          question: "Decision 2: Choose the right product. Which product best meets this need?",
-          options: [
-            "A. Loose Powder",
-            "B. Blush Duo",
-            "C. OBC The Bronzer",
-            "D. Corrector",
-          ],
-          correct: 3,
-          feedback: "Why: The bronzer is designed to give a radiant, sun‑kissed glow and soft definition.",
-        },
-        {
-          question: "Decision 3: Decide how to apply it. The customer adds: “I want it to look very natural.” How should you recommend applying it?",
-          options: [
-            "A. Apply heavily in one layer",
-            "B. Apply lightly to bare skin for a natural, tanned look ",
-            "C. Mix it with foundation",
-            "D. Apply only under the eyes",
-          ],
-          correct: 2,
-          feedback: "Light application gives a soft, natural glow without looking heavy.",
-        },
-        {
-          question: "Decision 4: Explain how to build the look. The customer asks: “What if I want more definition for the evening?” What is the best response?",
-          options: [
-            "A. “Use a different product.”",
-            "B. “Apply powder first.”",
-            "C. “Start light and build it up for a more sculpted, defined finish.”",
-            "D. “Apply a thick layer straight away.”",
-          ],
-          correct: 3,
-          feedback: "Why: The bronzer is designed to be buildable, allowing both natural and sculpted looks.",
-        },
-      ],
-    },
-  },
+  { href: "#hydrating-toner", label: "Hydrating toner" },
+  { href: "#brightening-toner", label: "Brightening toner" },
 ];
 
 const lessons = [
   {
-    id: "primer",
+    id: "hydrating-toner",
     lesson: "Lesson 1",
-    title: "The lipstick",
+    title: "Hydrating toner",
     visual: "primer",
     theme: { accent: "#d2b7a6", soft: "#f4efea", deep: "#8d7260" },
     bannerImage: lesson1BannerImage,
     productImages: [lipstickProductImage1, lipstickProductImage2],
-    productName: "1.1) OBC lipstick",
-    looksLike: "What it looks like:",
-    overviewHeading: "1.1.1) Product overview",
+    productName: "OBC hydrating toner",
+    looksLike: "What it looks like",
+    overviewHeading: "Product overview",
     overview: [
-      "Lip care meets the desire for rich, bold and durable colour.",
-      "This vegan and dermatologically tested formula is smooth and creamy, with precise and even coverage and a velvety demi matte finish.",
-      "The deeply hydrating OBC lipstick is designed to penetrate the superficial layers of the skin and absorb water, creating a smoothing and volumizing effect that also helps enhance the skin's ability to retain moisture and improves skin firmness and elasticity.",
-      "Enriched with a mix of:",
+      "What it does",
     ],
     overviewBullets: [
-      "Wild mango butter, which is ideal for dry, damaged skin as it is rich in vitamins and minerals and offers protection against UV rays. Wild mango butter is also known to smooth wrinkles and restore skin's elasticity.",
-      "Hyaluronic spheres, which provide an enhanced plumping and hydrating effect.",
+      "Helps brighten the skin without drying it out or disrupting the skin’s natural moisture barrier.",
+      "Refines and refreshes the skin after cleansing.",
+      "Provides antioxidant protection to support healthy-looking skin.",
+      "Helps calm the skin and reduce irritation.",
     ],
     sections: [
-      { heading: "1.1.2) What it does", bullets: ["Evens out the skin tone while still looking natural.", "Adapts to the skin's natural colour for a seamless finish.", "Gives the skin a soft glow with a velvety result.", "Provides SPF15 protection from UV damage.", "Hydrates, smooths, and improves skin texture."] },
-      { heading: "1.1.3) Who is it for", label: "Customers who:", bullets: ["Want very natural, \"my skin but better\" coverage.", "Don't like wearing foundation.", "Want skincare and make-up in one step.", "Of all skin types.", "Want light coverage with sun protection."] },
-      { heading: "1.1.4) How to sell", bullets: ["\"This adapts to your skin tone for a natural, even glow.\"", "\"It feels like skincare but gives your skin a polished look.\"", "\"Perfect if you don't like heavy foundation.\"", "\"It evens out your skin and includes SPF protection.\""] },
-      { heading: "1.1.5) When to recommend", paragraph: "Recommend this when a customer says they want light coverage, natural skin, or something quick and easy for everyday wear." },
+      {
+        heading: "Why it works (from the ingredients shown)",
+        bullets: [
+          "Vitamin C (Magnesium Ascorbyl Phosphate) helps brighten the complexion, protect the skin barrier, and support collagen production for smoother, firmer skin.",
+          "Witch Hazel has anti-inflammatory and antiviral properties that help relieve inflammation and reduce irritation.",
+          "Botanical extracts like Ylang Ylang and rosemary help refine and refresh the skin.",
+          "Cruelty-free, with no artificial fragrance or colourants.",
+        ],
+      },
+      {
+        heading: "Who is it for",
+        label: "This toner is ideal for customers who:",
+        bullets: [
+          "Want brighter, fresher-looking skin without dryness.",
+          "Feel their skin is dull or uneven after cleansing.",
+          "Have sensitive or easily irritated skin and need a gentle toner.",
+          "Want a toner that supports the skin barrier, not strips it.",
+          "Suitable for all skin types, especially normal, dry, or sensitive skin.",
+        ],
+      },
+      {
+        heading: "How to sell",
+        subsections: [
+          {
+            label: "Start with the need",
+            paragraph: "“If your skin feels dull, irritated, or dry after cleansing…”",
+          },
+          {
+            label: "Position the product",
+            paragraph: "“This hydrating toner helps brighten your skin while keeping it calm and hydrated.”",
+          },
+          {
+            label: "Link to the routine",
+            paragraph: "“Use it straight after cleansing to prep your skin and help the rest of your skincare work better.”",
+          },
+          {
+            label: "Close the sale",
+            paragraph: "“It’s a great everyday step if you want fresh, healthy-looking skin without irritation.”",
+          },
+        ],
+      },
     ],
-    topTip: "This is ideal for customers who want quick, easy make-up with skincare benefits.",
     assessment: {
       title: "Test your knowledge",
-      scenario: "Learning Scenario (4 decisions): \"I want bold colour... but I don't want dry lips\"",
-      scene: "Set the scene",
+      scenario: "Scenario: Recommending the Hydrating Toner",
+      scene: "",
       customerIntro: "A customer says:",
-      customerQuote: "\"I want a rich lipstick that lasts, but my lips get dry easily. I also don't like sticky or messy colour.\"",
-      goal: "Your goal: Recommend the right product and explain it simply and confidently.",
-      button: "Click Here",
+      customerQuote: "“After I cleanse, my skin feels tight and irritated. I want something gentle that will hydrate my skin, not dry it out.”",
+      goal: "You recommend the OBC Hydrating Toner.",
       quiz: [
         {
-          question: "Decision 1: Identify the customer's main need. What is the customer mainly asking for?",
+          question: "Decision Question 1: Start with the need. What is the best response to show you understand the customer’s concern?",
           options: [
-            "A. A sheer gloss with no colour",
-            "B. A lip balm only",
-            "C. Bold, long-lasting colour that still feels hydrating",
-            "D. A powder to set foundation",
+            "A. “Do you want something that removes oil?”",
+            "B. “Are you looking for hydration and comfort after cleansing?”",
+            "C. “This toner works for all skin types.”",
+            "D. “This is one of our newest toners.”",
           ],
-          correct: 2,
-          feedback: "Correct choice: C. Why: The customer wants rich colour that lasts, but also wants comfort and hydration.",
+          correct: 1,
         },
         {
-          question: "Decision 2: Choose the right product. Which product best matches this need?",
+          question: "Decision Question 2: Position the product. How should you position the Hydrating Toner?",
           options: [
-            "A. Loose Powder",
-            "B. Eye Pencil",
-            "C. OBC The Lipstick",
-            "D. Corrector",
+            "A. “This is a strong toner that tightens the skin.”",
+            "B. “This hydrates and soothes your skin without disrupting the skin barrier.”",
+            "C. “This is mainly for oily skin.”",
+            "D. “This replaces moisturiser in your routine.”",
           ],
-          correct: 2,
-          feedback: "Correct choice: C. Why: OBC The Lipstick is positioned as lip care plus rich, durable colour.",
+          correct: 1,
         },
         {
-          question: "Decision 3: Explain what it will feel/look like. The customer asks: \"What finish is it? Is it drying?\" What is the best response?",
+          question: "Decision Question 3: Link to the routine. The customer asks how to use it. What should you say?",
           options: [
-            "A. \"It's a glitter gloss.\"",
-            "B. \"It's very matte and will feel tight.\"",
-            "C. \"It's smooth and creamy with even coverage and a velvety demi-matte finish.\"",
-            "D. \"It's a liquid stain that peels off.\"",
+            "A. “Use it only when your skin feels dry.”",
+            "B. “Apply it after moisturiser.”",
+            "C. “Use it straight after cleansing to prep your skin for the rest of your skincare.”",
+            "D. “Use it instead of cleansing in the morning.”",
           ],
           correct: 2,
-          feedback: "Correct choice: C. Why: The formula is described as smooth and creamy, with precise and even coverage and a velvety demi-matte finish.",
         },
         {
-          question: "Decision 4: Close the sale (solve the dry-lip concern). The customer says: \"My lips always feel dry with lipstick.\" What is the best closing line?",
+          question: "Decision Question 4: Close the sale. Which response best closes the sale?",
           options: [
-            "A. \"Dry lips are normal with lipstick.\"",
-            "B. \"Just use more powder to set it.\"",
-            "C. \"This lipstick is deeply hydrating and helps lips look smoother and more plump while you wear it.\"",
-            "D. \"This will permanently change your lip shape.\"",
+            "A. “You can try it if you want.”",
+            "B. “It’s a toner many people use.”",
+            "C. “It’s a great everyday toner if you want calm, hydrated, healthy-looking skin.”",
+            "D. “It’s similar to other toners.”",
           ],
           correct: 2,
-          feedback: "Correct choice: C. Why: The product is described as deeply hydrating, creating a smoothing and volumising effect, and helping moisture retention.",
         },
       ],
     },
   },
   {
-    id: "corrector",
+    id: "brightening-toner",
     lesson: "Lesson 2",
-    title: "Lip pencil",
+    title: "Brightening toner",
     visual: "corrector",
     theme: { accent: "#e4b6aa", soft: "#f7f1ed", deep: "#a67867" },
     bannerImage: correctorBannerImage,
     productImages: [lipPencilProductImage1, lipPencilProductImage2],
-    productName: "2.1) OBC lip pencil",
-    looksLike: "What it looks like:",
-    overviewHeading: "2.1.1) Product overview",
+    productName: "OBC brightening toner",
+    looksLike: "What it looks like",
+    overviewHeading: "Product overview",
     overview: [
-      "A creamy, soft and velvety consistency that glides over the lips and helps define the perfect lip contour.",
-      "A pencil that can also be used as a lipstick base, to enhance lipstick colour, and help it last longer.",
-      "Comes in 3 shades with a semi-matte finish, perfect for those who love the seductive look.",
-      "The formula's soft focus properties help to give the appearance of more volumized lips.",
-      "Enriched with a mix of:",
+      "What it does",
     ],
     overviewBullets: [
-      "Vitamin E, which is an antioxidant that protects the skin from damage caused by free radicals and pollution.",
-      "Vitamin E also moisturizes by reducing water loss which keeps the skin soft and elastic and also promotes skin repair and healing.",
-      "Offers UV protection, defending the skin from harmful ultraviolet rays.",
-      "Olus Oil, which is a moisturizing emollient, with anti oxidant properties, derived from grapeseed.",
-      "Forms a protective barrier on the skin, preventing water loss.",
-      "Ideal for dry and sensitive skin.",
-      "Helps defend the skin from environmental stress and premature aging.",
-      "Beeswax, a natural ingredient that softens and smooths the skin.",
-      "Emollient, film-forming, and protective properties.",
-      "Creates a protective barrier preventing moisture loss.",
-      "Silica microspheres, which are known for their ability to scatter light, creating a blurring effect that helps minimize the appearance of fine lines and imperfections.",
+      "This formula helps brighten without drying without drying or disrupting the skin’s natural moisture barrier.",
+      "Botanical extracts like Ylang Ylang, rosemary and with hazel work to refine and refresh, while magnesium ascorbyl phosphate, which is a vitamin C derivative delivers powerful antioxidant protection.",
     ],
     sections: [
-      { heading: "2.1.2) What it does", bullets: ["Defines the lip shape for a clean, polished look", "Helps lipstick apply more evenly and last longer", "Creates the appearance of fuller, more volumised lips", "Smooths and softens the lips with a velvety finish", "Protects and conditions the lips while wearing it"] },
-      { heading: "2.1.3) How to use it", subsections: [{ label: "As a lip liner:", bullets: ["Line the lips to define shape and prevent lipstick from feathering"] }, { label: "As a base:", bullets: ["Fill in the lips before applying lipstick to boost colour and wear time"] }] },
-      { heading: "2.1.4) Who is it for", label: "Customers who:", bullets: ["Want more defined lips.", "Want their lipstick to last longer.", "Like a seductive, semi-matte lip look.", "Have dry or sensitive lips.", "Want fuller-looking lips without gloss."] },
-      { heading: "2.1.5) How to sell", bullets: ["\"This defines your lips and helps your lipstick last longer.\"", "\"You can wear it alone or under lipstick as a base.\"", "\"It gives the look of fuller lips without feeling heavy.\"", "\"It's soft and comfortable, not dry.\""] },
+      {
+        heading: "Why it works (from the ingredients shown)",
+        bullets: [
+          "Vitamin C is well known to help brighten skin complexion, enhance sun protection and protect the skin’s barrier. Vitamin C also helps to stimulate collagen production, resulting in smoother, firmer skin.",
+          "Witch Hazel has anti inflammatory and antiviral properties that help to relieve inflammation and reduce irritation.",
+          "Is cruelty Free with no artificial fragrance or colourants.",
+        ],
+      },
+      {
+        heading: "Who is it for",
+        label: "Customers who:",
+        bullets: [
+          "Want brighter, fresher-looking skin without dryness.",
+          "Have sensitive or easily irritated skin.",
+          "Want skincare that hydrates, soothes, and strengthens the skin barrier.",
+          "Prefer gentle, cruelty-free products without artificial fragrance or colourants.",
+        ],
+      },
+      {
+        heading: "How to sell",
+        subsections: [
+          {
+            label: "Start with the need",
+            paragraph: "“If your skin looks dull, uneven, or tired — especially if brightening products usually dry you out…”",
+          },
+          {
+            label: "Position the product",
+            paragraph: "“This brightening toner helps improve radiance while keeping the skin hydrated and comfortable. It’s gentle, calming, and suitable for sensitive skin.”",
+          },
+          {
+            label: "Link to the routine",
+            paragraph: "“Use it after cleansing, before your serum or moisturiser, to refresh the skin and prep it for the rest of your routine.”",
+          },
+          {
+            label: "Close the sale",
+            paragraph: "“It’s ideal if you want brighter, healthier-looking skin without tightness or irritation.”",
+          },
+        ],
+      },
     ],
-    topTip: "Using it all over the lips helps lipstick look richer and last longer.",
     assessment: {
       title: "Test your knowledge",
-      scenario: "Learning Scenario (4 decisions): \"My lipstick fades and bleeds\"",
-      scene: "Set the scene",
+      scenario: "Scenario: Recommending the Brightening Toner",
+      scene: "",
       customerIntro: "A customer says:",
-      customerQuote: "\"My lipstick never lasts. It fades quickly and sometimes it bleeds outside my lip line. I still want a soft, semi-matte look.\"",
-      goal: "Your goal: Recommend the right product and explain how it helps in simple language.",
-      button: "Click Here",
+      customerQuote: "“My skin looks a bit dull and uneven, but I don’t want anything that will dry it out or irritate my skin.”",
+      goal: "You recommend the OBC Brightening Toner.",
       quiz: [
         {
-          question: "Decision 1: Identify the customer's main need. What problem are you solving?",
+          question: "Decision Question 1: Start with the need. What is the best response to show you understand the customer’s concern?",
           options: [
-            "A. The customer wants a new foundation shade",
-            "B. The customer wants longer-lasting lipstick and a more defined lip line",
-            "C. The customer wants more shimmer on the lips",
-            "D. The customer wants a face powder to reduce shine",
+            "A. “Are you looking for a strong exfoliating toner?”",
+            "B. “Do you want brighter skin without drying or irritating it?”",
+            "C. “This toner works for all skin types.”",
+            "D. “This is one of our best-selling toners.”",
           ],
           correct: 1,
-          feedback: "Correct choice: B.",
         },
         {
-          question: "Decision 2: Choose the right product. Which product best matches this need?",
+          question: "Decision Question 2: Position the product. How should you position the Brightening Toner to this customer?",
           options: [
-            "A. OBC The Loose Powder",
-            "B. OBC The Eye Pencil",
-            "C. OBC The Lipstick",
-            "D. OBC The Lip Pencil",
-          ],
-          correct: 3,
-          feedback: "Correct choice: D.",
-        },
-        {
-          question: "Decision 3: Explain how to use it (keep it simple). The customer asks: \"How do I use it so my lipstick lasts?\" What's the best advice?",
-          options: [
-            "A. \"Only use it in the middle of your lips.\"",
-            "B. \"Use it after lipstick, on top.\"",
-            "C. \"Line your lips to define the shape, or fill in your lips first as a base before lipstick.\"",
-            "D. \"Use it on your cheeks as blush.\"",
+            "A. “This removes oil and tightens the skin.”",
+            "B. “This is a strong vitamin C treatment.”",
+            "C. “This gently brightens your skin while keeping it hydrated and calm.”",
+            "D. “This replaces moisturiser in your routine.”",
           ],
           correct: 2,
-          feedback: "Correct choice: C. Why: The lip pencil can be used as a liner (define shape) or as a base (fill in lips to boost colour and wear time).",
         },
         {
-          question: "Decision 4: Close the recommendation (sell line). Choose the best closing line:",
+          question: "Decision Question 3: Link to the routine. The customer asks how it fits into their skincare routine. What should you say?",
           options: [
-            "A. \"This will permanently change your lip shape.\"",
-            "B. \"This defines your lips and helps your lipstick look richer and last longer - without feeling dry.\"",
-            "C. \"This is only for people who wear heavy make-up.\"",
-            "D. \"This is just for drawing fun shapes.\"",
+            "A. “Use it only when your skin feels dull.”",
+            "B. “Apply it after moisturiser.”",
+            "C. “Use it straight after cleansing to prep your skin and support the rest of your routine.”",
+            "D. “Use it instead of cleansing in the morning.”",
           ],
-          correct: 1,
-          feedback: "Correct choice: B. Why: The product is described as creamy, soft and velvety, and designed to enhance lipstick colour and lasting power.",
+          correct: 2,
+        },
+        {
+          question: "Decision Question 4: Close the sale. Which response best closes the sale?",
+          options: [
+            "A. “You can try it if you want.”",
+            "B. “It’s a good toner for most people.”",
+            "C. “It’s a great everyday toner if you want brighter, healthy-looking skin without irritation.”",
+            "D. “It’s similar to other toners we sell.”",
+          ],
+          correct: 2,
         },
       ],
     },
@@ -788,7 +421,7 @@ const lessons = [
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Module 4 | Let's talk makeup - Lips</title>
+    <title>Module 4 | Let’s talk skincare - Toners</title>
   </head>
   <body class="bg-[#f4f1ed] text-[#27211c] selection:bg-[#d8c4b4] selection:text-[#241d18]">
     <main class="mx-auto max-w-[1240px] px-3 py-3 md:px-6 md:py-6">
@@ -796,7 +429,7 @@ const lessons = [
         <div class="flex items-center justify-between gap-3 md:hidden">
           <div class="flex min-w-0 items-center gap-3">
             <img src={TFG_LOGO} alt="TFG logo" class="h-10 w-10 shrink-0" />
-            <p class="min-w-0 text-sm font-medium leading-5 text-[#51463d]">Let's talk makeup - Lips</p>
+            <p class="min-w-0 text-sm font-medium leading-5 text-[#51463d]">Let’s talk skincare - Toners</p>
           </div>
 
           <details class="relative shrink-0 md:hidden" data-mobile-nav>
@@ -822,7 +455,7 @@ const lessons = [
         <div class="hidden md:flex md:items-center md:justify-between md:gap-6">
           <div class="flex items-center gap-4">
             <img src={TFG_LOGO} alt="TFG logo" class="h-10 w-10" />
-            <p class="text-sm font-medium text-[#51463d]">Let's talk makeup - Lips</p>
+            <p class="text-sm font-medium text-[#51463d]">Let’s talk skincare - Toners</p>
           </div>
           <div class="flex flex-wrap gap-2 text-sm text-[#51463d]">
             {navItems.map((item) => (
@@ -840,7 +473,7 @@ const lessons = [
           <div class="mt-6 inline-flex items-center gap-3 rounded-full border border-[#e6ddd5] bg-white/88 px-4 py-2 backdrop-blur md:mt-8">
             <span class="text-xs font-semibold uppercase tracking-[0.22em] text-[#8f7968]">Module 4</span>
           </div>
-          <h1 class="mt-10 max-w-md text-4xl font-semibold tracking-[-0.03em] text-[#2f2924] md:mt-12 md:text-6xl">Let's talk makeup - Lips</h1>
+          <h1 class="mt-10 max-w-md text-4xl font-semibold tracking-[-0.03em] text-[#2f2924] md:mt-12 md:text-6xl">Let’s talk skincare - Toners</h1>
         </div>
       </section>
 
@@ -851,7 +484,7 @@ const lessons = [
               <img
                 src={lesson.bannerImage ? lesson.bannerImage.src : softBanner(lesson.theme.accent, lesson.theme.soft, lesson.theme.deep)}
                 alt={`${lesson.title} banner`}
-                class={`h-[220px] w-full object-cover md:h-[280px] lg:h-[320px] ${lesson.id === "primer" ? "object-right" : ""}`}
+                class={`h-[220px] w-full object-cover md:h-[280px] lg:h-[320px] ${lesson.id === "hydrating-toner" ? "object-right" : ""}`}
               />
             </div>
 
@@ -944,9 +577,9 @@ const lessons = [
                   if (!lesson.topTip && !howToSellSection) return null;
 
                   return (
-                    <div class="grid gap-4 md:grid-cols-2">
+                    <div class="space-y-4">
                       {howToSellSection && (
-                        <article class={`rounded-[0.95rem] border border-[#c9bfaa] p-4 text-[#2f2924] md:p-5 ${!lesson.topTip ? "md:col-span-2" : ""}`} style={`background: linear-gradient(135deg, rgba(255,255,255,0.96) 0%, ${lesson.theme.accent}26 100%);`}>
+                        <article class="rounded-[0.95rem] border border-[#c9bfaa] p-4 text-[#2f2924] md:p-5" style={`background: linear-gradient(135deg, rgba(255,255,255,0.96) 0%, ${lesson.theme.accent}26 100%);`}>
                           <div class="flex items-center gap-2 text-[1.5rem] font-semibold tracking-[-0.02em] text-[#6e6054]">
                             <img src={topTipIcon} alt="" aria-hidden="true" class="w-auto shrink-0" style="height:1.1em;" />
                             <p class="leading-none">{howToSellSection.heading ? stripNumbering(howToSellSection.heading) : "How to sell"}</p>
@@ -981,7 +614,7 @@ const lessons = [
                       )}
 
                       {lesson.topTip && (
-                        <article class={`rounded-[0.95rem] border border-[#c9bfaa] p-4 text-[#2f2924] md:p-5 ${!howToSellSection ? "md:col-span-2" : ""}`} style={`background: linear-gradient(135deg, rgba(255,255,255,0.96) 0%, ${lesson.theme.accent}26 100%);`}>
+                        <article class="rounded-[0.95rem] border border-[#c9bfaa] p-4 text-[#2f2924] md:p-5" style={`background: linear-gradient(135deg, rgba(255,255,255,0.96) 0%, ${lesson.theme.accent}26 100%);`}>
                           <div class="flex items-center gap-2 text-[1.5rem] font-semibold tracking-[-0.02em] text-[#6e6054]">
                             <img src={topTipIcon} alt="" aria-hidden="true" class="w-auto shrink-0" style="height:1.1em;" />
                             <p class="leading-none">Top Tip</p>
@@ -1019,8 +652,8 @@ const lessons = [
                       <div class="min-w-0">
                         <p class="inline-flex rounded-full bg-white/18 px-4 py-2 text-sm font-semibold">{lesson.assessment.title}</p>
                         <p class="mt-4 text-[1.38rem] font-semibold leading-[1.45] tracking-[-0.02em]">{lesson.assessment.scenario}</p>
-                        <p class="mt-5 text-lg font-semibold">{lesson.assessment.scene}</p>
-                        <p class="mt-3 text-[1rem] leading-8 text-white/92">{lesson.assessment.customerIntro}</p>
+                        {lesson.assessment.scene && <p class="mt-5 text-lg font-semibold">{lesson.assessment.scene}</p>}
+                        {lesson.assessment.customerIntro && <p class="mt-3 text-[1rem] leading-8 text-white/92">{lesson.assessment.customerIntro}</p>}
 
                         <div class="mt-5 flex items-start gap-4">
                           <div class="avatar placeholder shrink-0">
@@ -1224,4 +857,3 @@ const lessons = [
     </script>
   </body>
 </html>
-

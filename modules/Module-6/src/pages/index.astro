@@ -1,7 +1,85 @@
 ---
 import "../styles/global.css";
-import courseHero from "../images/mod-6-hero.jpg";
+import courseHero from "../images/mod_5_eyes_hero.jpg";
+import primerProductImage1 from "../images/product-eye-liner-21jpg.jpg";
+import primerProductImage2 from "../images/product-eye-liner-2.jpg";
+import lesson1BannerImage from "../images/lesson-1-banner-inage.jpg";
+import correctorProductImage1 from "../images/product-mascara-1.jpg";
+import correctorProductImage2 from "../images/product-mascara-2.jpg";
+import correctorBannerImage from "../images/lesson-2-banner.jpg";
 import topTipIcon from "../images/top-tip.svg?url";
+
+function stripNumbering(text) {
+  if (!text) return text;
+  const parts = text.split(") ");
+  if (parts.length < 2) return text;
+  const first = parts[0];
+  const isNumbered = first.split(".").every((part) => part && [...part].every((char) => char >= "0" && char <= "9"));
+  return isNumbered ? parts.slice(1).join(") ") : text;
+}
+
+function withBulletPeriod(text) {
+  if (!text) return text;
+  const trimmed = text.trim();
+  const trailingQuoteMatch = trimmed.match(/[”"]$/);
+  const trailingQuote = trailingQuoteMatch ? trailingQuoteMatch[0] : "";
+  const core = trailingQuote ? trimmed.slice(0, -1).trimEnd() : trimmed;
+
+  if (/[.!?:]$/.test(core)) return trimmed;
+  if (core.endsWith(",")) return `${core.slice(0, -1)}.${trailingQuote}`;
+  return `${core}.${trailingQuote}`;
+}
+
+function isHowToSellSection(section) {
+  return stripNumbering(section.heading || "").toLowerCase().includes("how to sell");
+}
+
+function isWhenToRecommendSection(section) {
+  return stripNumbering(section.heading || "").toLowerCase().includes("when to recommend");
+}
+
+function getHowToSellSection(lesson) {
+  return lesson.sections.find((section) => isHowToSellSection(section));
+}
+
+function getWhenToRecommendSection(lesson) {
+  return lesson.sections.find((section) => isWhenToRecommendSection(section));
+}
+
+function getRegularSectionsAfterOverview(lesson) {
+  return lesson.sections.filter(
+    (section) => !isHowToSellSection(section) && !isWhenToRecommendSection(section)
+  );
+}
+
+function getSectionSpanClasses(sections) {
+  const classes = Array(sections.length).fill("");
+  let openHalfWidthIndex = null;
+
+  sections.forEach((section, index) => {
+    if (section.subsections) {
+      if (openHalfWidthIndex !== null) {
+        classes[openHalfWidthIndex] = "md:col-span-2";
+        openHalfWidthIndex = null;
+      }
+
+      classes[index] = "md:col-span-2";
+      return;
+    }
+
+    if (openHalfWidthIndex === null) {
+      openHalfWidthIndex = index;
+    } else {
+      openHalfWidthIndex = null;
+    }
+  });
+
+  if (openHalfWidthIndex !== null) {
+    classes[openHalfWidthIndex] = "md:col-span-2";
+  }
+
+  return classes;
+}
 
 function svgToDataUri(svg) {
   return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
@@ -33,39 +111,310 @@ const OBC_LOGO = svgToDataUri(`
 </svg>
 `);
 
+function softBanner(accent, soft, deep) {
+  return svgToDataUri(`
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 360">
+      <rect width="1400" height="360" fill="${soft}"/>
+      <ellipse cx="1120" cy="90" rx="220" ry="88" fill="${accent}" opacity="0.72"/>
+      <ellipse cx="1210" cy="66" rx="110" ry="46" fill="#ffffff" opacity="0.66"/>
+      <path d="M980 230c105-44 232-41 336 12-74 46-174 79-296 79-70 0-138-12-206-33 45-18 98-39 166-58Z" fill="${accent}" opacity="0.52"/>
+      <path d="M0 360c170-114 342-138 512-116 110 14 213 48 318 88 107 40 217 67 338 67H0Z" fill="#ffffff" opacity="0.78"/>
+      <circle cx="180" cy="104" r="54" fill="#ffffff" opacity="0.42"/>
+      <circle cx="282" cy="70" r="18" fill="${deep}" opacity="0.12"/>
+    </svg>
+  `);
+}
+
+function softProduct(accent, soft, deep, shape) {
+  const shapes = {
+    primer: `
+      <rect x="170" y="180" width="130" height="260" rx="14" fill="#1b1717"/>
+      <rect x="338" y="152" width="110" height="320" rx="28" fill="#231d1e"/>
+      <rect x="355" y="172" width="76" height="226" rx="16" fill="#151212"/>
+      <rect x="812" y="118" width="112" height="350" rx="34" fill="#ffffff"/>
+      <rect x="828" y="160" width="80" height="200" rx="20" fill="${accent}" opacity="0.35"/>
+      <ellipse cx="870" cy="500" rx="82" ry="20" fill="#1b1717" opacity="0.12"/>
+    `,
+    corrector: `
+      <rect x="186" y="156" width="96" height="318" rx="16" fill="#1d1718"/>
+      <rect x="334" y="150" width="82" height="344" rx="22" fill="#272021"/>
+      <rect x="346" y="234" width="58" height="212" rx="16" fill="${accent}" opacity="0.42"/>
+      <rect x="816" y="150" width="64" height="332" rx="20" fill="#ffffff"/>
+      <rect x="826" y="204" width="44" height="172" rx="14" fill="${accent}" opacity="0.42"/>
+      <rect x="932" y="160" width="28" height="262" rx="14" fill="#ffffff"/>
+      <ellipse cx="946" cy="434" rx="25" ry="18" fill="${accent}" opacity="0.8"/>
+    `,
+    powder: `
+      <circle cx="302" cy="334" r="136" fill="#1c1919"/>
+      <circle cx="302" cy="334" r="100" fill="${accent}" opacity="0.58"/>
+      <circle cx="900" cy="324" r="134" fill="#f3ecdf"/>
+      <circle cx="900" cy="324" r="102" fill="${accent}" opacity="0.52"/>
+      <circle cx="872" cy="292" r="7" fill="${deep}" opacity="0.24"/>
+      <circle cx="932" cy="286" r="9" fill="${deep}" opacity="0.22"/>
+      <circle cx="954" cy="336" r="8" fill="${deep}" opacity="0.18"/>
+      <circle cx="860" cy="360" r="7" fill="${deep}" opacity="0.18"/>
+    `,
+    blush: `
+      <circle cx="302" cy="334" r="136" fill="#1c1919"/>
+      <circle cx="302" cy="334" r="100" fill="${accent}" opacity="0.7"/>
+      <circle cx="882" cy="228" r="82" fill="#1c1919"/>
+      <circle cx="882" cy="228" r="58" fill="${accent}" opacity="0.64"/>
+      <rect x="786" y="390" width="190" height="120" rx="10" fill="#1c1919"/>
+      <rect x="804" y="408" width="154" height="84" rx="8" fill="${soft}"/>
+    `,
+    bronzer: `
+      <circle cx="302" cy="334" r="136" fill="#1c1919"/>
+      <circle cx="302" cy="334" r="100" fill="${accent}" opacity="0.74"/>
+      <path d="M226 292c54-18 105-17 151 5M220 334c58-18 111-17 164 4M226 376c54-18 105-17 151 5" stroke="${deep}" stroke-width="10" opacity="0.22" fill="none" stroke-linecap="round"/>
+      <circle cx="882" cy="228" r="82" fill="#1c1919"/>
+      <circle cx="882" cy="228" r="58" fill="${accent}" opacity="0.66"/>
+      <rect x="786" y="390" width="190" height="120" rx="10" fill="#1c1919"/>
+    `,
+  };
+
+  return svgToDataUri(`
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 640">
+      <rect width="1200" height="640" fill="${soft}"/>
+      <rect x="56" y="56" width="490" height="528" rx="12" fill="#ffffff" opacity="0.72"/>
+      <rect x="654" y="56" width="490" height="528" rx="12" fill="#ffffff" opacity="0.72"/>
+      ${shapes[shape]}
+      <circle cx="210" cy="520" r="84" fill="${accent}" opacity="0.16"/>
+      <circle cx="986" cy="520" r="96" fill="${deep}" opacity="0.08"/>
+    </svg>
+  `);
+}
+
 const navItems = [
-  { href: "#wrap-up", label: "Wrap-up" },
-  { href: "#final-tip", label: "Final tip" },
-  { href: "#download", label: "Product info" },
+  { href: "#skin-polishing-cream", label: "Skin polishing cream" },
+  { href: "#brightening-cream", label: "Brightening cream" },
 ];
 
-const wrapUp = {
-  label: "Course wrap-up",
-  title: "You're ready to consult with confidence",
-  intro: [
-    "You've reached the end of this course - well done.",
-    "You now have the product knowledge, language, and confidence to support customers across the O Beauty Co make-up range.",
-  ],
-  finalTipTitle: "One final tip",
-  finalTipIntro: "When in doubt, keep it simple:",
-  finalTipQuestions: [
-    "What does it do?",
-    "Who is it for?",
-    "How will it help this customer today?",
-  ],
-  finalTipClose: "If you can answer those three questions, you're already doing a great consult.",
-  closing: "You're ready. Go help customers feel confident, comfortable, and cared for - one product at a time.",
-  downloadLabel: "Download the product information here",
-};
-
-const sectionPadding = "px-4 py-5 md:px-8 md:py-8 lg:px-10";
+const lessons = [
+  {
+    id: "skin-polishing-cream",
+    lesson: "Lesson 1",
+    title: "Skin polishing cream",
+    visual: "primer",
+    theme: { accent: "#d2b7a6", soft: "#f4efea", deep: "#8d7260" },
+    bannerImage: lesson1BannerImage,
+    productImages: [primerProductImage1, primerProductImage2],
+    productName: "OBC skin polishing cream",
+    looksLike: "What it looks like",
+    overviewHeading: "Product overview",
+    overview: [
+      "Helps brighten skin by removing dead skin cells.",
+    ],
+    sections: [
+      {
+        heading: "Product Benefits",
+        bullets: [
+          "Apricot seed, contains vitamin A which can help to improve the appearance of wrinkles and hyperpigmentation. Apricot also helps to strengthen the skin’s natural barrier.",
+          "Volcanic Ash aids exfoliation of the skin, helping to renew skin texture, while also managing excess sebum production.",
+          "Is cruelty-free with no artificial fragrance or colourants.",
+        ],
+      },
+      {
+        heading: "Who is it for",
+        label: "Customers who:",
+        bullets: [
+          "Feel their skin looks dull or rough.",
+          "Want brighter, smoother skin.",
+          "Are concerned about uneven texture, pigmentation, or early fine lines.",
+          "Need gentle exfoliation to remove dead skin cells.",
+          "Prefer cruelty-free products with no artificial fragrance or colourants.",
+        ],
+      },
+      {
+        heading: "How to sell",
+        subsections: [
+          {
+            label: "Start with the need",
+            paragraph: "“If your skin looks dull or feels rough and uneven…”",
+          },
+          {
+            label: "Position the product",
+            paragraph: "“This skin polishing cream gently exfoliates to remove dead skin cells and help brighten your skin.”",
+          },
+          {
+            label: "Link to the routine",
+            paragraph: "“Use it after cleansing, a few times a week, to smooth the skin and help your serums and creams work better.”",
+          },
+          {
+            label: "Close the sale",
+            paragraph: "“It’s a great option if you want smoother, brighter-looking skin that feels fresh and renewed.”",
+          },
+        ],
+      },
+    ],
+    assessment: {
+      title: "Test your knowledge",
+      scenario: "Scenario: Recommending the Skin Polishing Cream",
+      scene: "",
+      customerIntro: "A customer says:",
+      customerQuote: "“My skin looks dull and feels a bit rough. I want something that will make it brighter and smoother, but I don’t want anything harsh.”",
+      goal: "You recommend the OBC Skin Polishing Cream.",
+      quiz: [
+        {
+          question: "Decision Question 1: Start with the need. What is the best response to show you understand the customer’s concern?",
+          options: [
+            "A. “Are you looking for a strong daily exfoliant?”",
+            "B. “Do you want smoother, brighter skin without being harsh on your skin?”",
+            "C. “This cream works for all skin types.”",
+            "D. “This is one of our most affordable creams.”",
+          ],
+          correct: 1,
+        },
+        {
+          question: "Decision Question 2: Position the product. How should you position the Skin Polishing Cream?",
+          options: [
+            "A. “This deeply scrubs the skin every day.”",
+            "B. “This gently removes dead skin cells to help brighten and smooth your skin.”",
+            "C. “This replaces your moisturiser.”",
+            "D. “This is mainly for very oily skin.”",
+          ],
+          correct: 1,
+        },
+        {
+          question: "Decision Question 3: Link to the routine. The customer asks how to use it. What is the best explanation?",
+          options: [
+            "A. “Use it every day instead of cleansing.”",
+            "B. “Apply it after moisturiser.”",
+            "C. “Use it after cleansing, a few times a week, to smooth the skin before the rest of your routine.”",
+            "D. “Use it only when your skin feels irritated.”",
+          ],
+          correct: 2,
+        },
+        {
+          question: "Decision Question 4: Close the sale. Which response best closes the sale?",
+          options: [
+            "A. “You can try it if you want.”",
+            "B. “It’s a good exfoliating product.”",
+            "C. “It’s great if you want smoother, brighter-looking skin that feels fresh and renewed.”",
+            "D. “It’s similar to other creams we sell.”",
+          ],
+          correct: 2,
+        },
+      ],
+    },
+  },
+  {
+    id: "brightening-cream",
+    lesson: "Lesson 2",
+    title: "Brightening cream",
+    visual: "corrector",
+    theme: { accent: "#e4b6aa", soft: "#f7f1ed", deep: "#a67867" },
+    bannerImage: correctorBannerImage,
+    productImages: [correctorProductImage1, correctorProductImage2],
+    productName: "OBC brightening cream",
+    looksLike: "What it looks like",
+    overviewHeading: "Product overview",
+    overview: [
+      "A rich and velvety formula that turns into an intriguing moment of pleasure and freshness for the skin.",
+      "It contains Bakuchiol, a natural retinol-like ingredient, well known for its action against fine lines and wrinkles as well as stimulating the physiological production of collagen and elastin and even out the skin texture.",
+      "Contains vitamin E, which is well known for its high anti-oxidant and anti-aging properties.",
+      "Designed for your daily routine, it is also suitable for use as a mask, with a skin boosting effect. Hyaluronic Acid, in different molecular weights for constant skin hydration. Hyaluronic acid also helps to promote hydration, skin elasticity and cell renewal and also helps to prevent against free radicals.",
+    ],
+    sections: [
+      {
+        heading: "Product Benefits",
+        bullets: [
+          "Bakuchiol, which is more delicate than Retinol, can be used on more sensitive skin, with the same performance. Bakuchiol also helps fights thin lines and wrinkles, stimulate the physiological elastin and collagen production as swell as tone up the skin.",
+          "Contains Shea Butter, which has a soothing and emollient effect on the skin.",
+          "Vitamin E, a strong anti-oxidant that has a barrier effect against free radicals and fights oxidative stress and skin ageing.",
+        ],
+      },
+      {
+        heading: "Who is it for",
+        label: "Customers who:",
+        bullets: [
+          "Want brighter, more even-looking skin.",
+          "Are concerned about fine lines, wrinkles, or loss of firmness.",
+          "Want anti-ageing benefits but have sensitive skin.",
+          "Prefer a rich, comforting cream that still feels gentle.",
+          "Want a product that works daily and can also be used as a treatment mask.",
+        ],
+      },
+      {
+        heading: "How to sell",
+        subsections: [
+          {
+            label: "Start with the need",
+            paragraph: "“If your skin looks dull, uneven, or you’re starting to notice fine lines…”",
+          },
+          {
+            label: "Position the product",
+            paragraph: "“This brightening cream helps smooth, firm, and brighten the skin using Bakuchiol, a gentle alternative to retinol.”",
+          },
+          {
+            label: "Link to the routine",
+            paragraph: "“Use it daily as your moisturiser, after your serum, or apply a thicker layer as a mask when your skin needs an extra boost.”",
+          },
+          {
+            label: "Close the sale",
+            paragraph: "“It’s ideal if you want brighter, smoother, more youthful-looking skin without irritation.”",
+          },
+        ],
+      },
+    ],
+    assessment: {
+      title: "Test your knowledge",
+      scenario: "Scenario: Recommending the Brightening Cream",
+      scene: "",
+      customerIntro: "A customer says:",
+      customerQuote: "“My skin looks dull and I’m starting to notice fine lines, but my skin is quite sensitive. I want something that will help brighten my skin without irritation.”",
+      goal: "You recommend OBC The Brightening Cream.",
+      quiz: [
+        {
+          question: "Decision Question 1: Start with the need. What is the best response to show you understand the customer’s concern?",
+          options: [
+            "A. “Are you looking for a strong retinol treatment?”",
+            "B. “Do you want brighter skin and help with fine lines, but something gentle?”",
+            "C. “This cream works for all skin types.”",
+            "D. “This is one of our premium creams.”",
+          ],
+          correct: 1,
+        },
+        {
+          question: "Decision Question 2: Position the product. How should you position the Brightening Cream?",
+          options: [
+            "A. “This is a heavy cream mainly for very dry skin.”",
+            "B. “This brightens and smooths the skin using Bakuchiol, a gentle alternative to retinol.”",
+            "C. “This replaces your serum completely.”",
+            "D. “This is only for night-time use.”",
+          ],
+          correct: 1,
+        },
+        {
+          question: "Decision Question 3: Link to the routine. The customer asks how to use it. What is the best explanation?",
+          options: [
+            "A. “Use it instead of cleansing.”",
+            "B. “Apply it before your serum.”",
+            "C. “Use it after your serum as your daily moisturiser, or apply a thicker layer as a mask.”",
+            "D. “Use it only once a week.”",
+          ],
+          correct: 2,
+        },
+        {
+          question: "Decision Question 4: Close the sale. Which response best closes the sale?",
+          options: [
+            "A. “You can think about it and decide later.”",
+            "B. “It’s a nice cream to have.”",
+            "C. “It’s ideal if you want brighter, smoother, youthful-looking skin without irritation.”",
+            "D. “It’s similar to other creams we sell.”",
+          ],
+          correct: 2,
+        },
+      ],
+    },
+  },
+];
 ---
 
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Module 6 | Course wrap-up: You're ready to consult with confidence</title>
+    <title>Module 6 | Let’s talk skincare - Creams</title>
   </head>
   <body class="bg-[#f4f1ed] text-[#27211c] selection:bg-[#d8c4b4] selection:text-[#241d18]">
     <main class="mx-auto max-w-[1240px] px-3 py-3 md:px-6 md:py-6">
@@ -73,12 +422,12 @@ const sectionPadding = "px-4 py-5 md:px-8 md:py-8 lg:px-10";
         <div class="flex items-center justify-between gap-3 md:hidden">
           <div class="flex min-w-0 items-center gap-3">
             <img src={TFG_LOGO} alt="TFG logo" class="h-10 w-10 shrink-0" />
-            <p class="min-w-0 text-sm font-medium leading-5 text-[#51463d]">Course wrap-up: You're ready to consult with confidence</p>
+            <p class="min-w-0 text-sm font-medium leading-5 text-[#51463d]">Let’s talk skincare - Creams</p>
           </div>
 
           <details class="relative shrink-0 md:hidden" data-mobile-nav>
             <summary class="flex h-11 w-11 cursor-pointer list-none items-center justify-center rounded-full border border-[#e8e0d8] bg-[#faf8f6] text-[#51463d] transition hover:bg-[#f4efea] [&::-webkit-details-marker]:hidden">
-              <span class="sr-only">Toggle navigation</span>
+              <span class="sr-only">Toggle lesson navigation</span>
               <span aria-hidden="true" class="flex flex-col gap-[0.28rem]">
                 <span class="block h-[2px] w-5 rounded-full bg-current"></span>
                 <span class="block h-[2px] w-5 rounded-full bg-current"></span>
@@ -99,7 +448,7 @@ const sectionPadding = "px-4 py-5 md:px-8 md:py-8 lg:px-10";
         <div class="hidden md:flex md:items-center md:justify-between md:gap-6">
           <div class="flex items-center gap-4">
             <img src={TFG_LOGO} alt="TFG logo" class="h-10 w-10" />
-            <p class="text-sm font-medium text-[#51463d]">Course wrap-up: You're ready to consult with confidence</p>
+            <p class="text-sm font-medium text-[#51463d]">Let’s talk skincare - Creams</p>
           </div>
           <div class="flex flex-wrap gap-2 text-sm text-[#51463d]">
             {navItems.map((item) => (
@@ -112,42 +461,252 @@ const sectionPadding = "px-4 py-5 md:px-8 md:py-8 lg:px-10";
       <section class="relative mt-4 overflow-hidden rounded-[1rem] border border-[#e3ddd7] bg-[#f6f1ec] shadow-[0_14px_36px_rgba(56,39,27,0.05)]">
         <img src={courseHero.src} alt="Beauty course hero image" class="absolute inset-0 h-full w-full object-cover object-center md:inset-y-0 md:left-auto md:right-0 md:w-[50%] md:object-right" />
         <div class="absolute inset-0 bg-[linear-gradient(180deg,_rgba(246,241,236,0.6)_0%,_rgba(246,241,236,1)_100%)] md:inset-y-0 md:left-auto md:right-[10%] md:w-[40%] md:bg-[linear-gradient(90deg,_#f6f1ec_0%,_rgba(246,241,236,0)_100%)]"></div>
-        <div class={`relative ${sectionPadding} md:py-20 lg:py-24`}>
+        <div class="relative px-4 py-10 md:px-10 md:py-20 lg:px-12 lg:py-24">
           <img src={OBC_LOGO} alt="Beauty Co. logo" class="h-[4.8rem] w-auto md:h-24" />
           <div class="mt-6 inline-flex items-center gap-3 rounded-full border border-[#e6ddd5] bg-white/88 px-4 py-2 backdrop-blur md:mt-8">
             <span class="text-xs font-semibold uppercase tracking-[0.22em] text-[#8f7968]">Module 6</span>
           </div>
-          <h1 class="mt-10 max-w-[42rem] text-4xl font-semibold tracking-[-0.03em] text-[#2f2924] md:mt-12 md:text-6xl">Wrap-up</h1>
+          <h1 class="mt-10 max-w-md text-4xl font-semibold tracking-[-0.03em] text-[#2f2924] md:mt-12 md:text-6xl">Let’s talk skincare - Creams</h1>
         </div>
       </section>
 
       <section class="mt-6 space-y-6">
-        <article id="wrap-up" class:list={["rounded-[1rem] border border-[#e3ddd7] bg-[#fbfaf8] shadow-[0_14px_36px_rgba(56,39,27,0.05)]", sectionPadding]}>
-          <h2 class="text-[30px] font-semibold leading-[1.15] tracking-[-0.03em] text-[#2f2924]">{wrapUp.title}</h2>
-          <div class="mt-5 space-y-4 text-[1.125rem] leading-8 text-[#4e4741]">
-            {wrapUp.intro.map((paragraph) => <p>{paragraph}</p>)}
-          </div>
-        </article>
+        {lessons.map((lesson) => (
+          <section id={lesson.id} class="overflow-hidden rounded-[1rem] border border-[#e3ddd7] bg-[#fbfaf8] shadow-[0_14px_36px_rgba(56,39,27,0.05)]">
+            <div class="overflow-hidden">
+              <img
+                src={lesson.bannerImage ? lesson.bannerImage.src : softBanner(lesson.theme.accent, lesson.theme.soft, lesson.theme.deep)}
+                alt={`${lesson.title} banner`}
+                class={`h-[220px] w-full object-cover md:h-[280px] lg:h-[320px] ${lesson.id === "skin-polishing-cream" ? "object-right" : ""}`}
+              />
+            </div>
 
-        <article id="final-tip" class:list={["rounded-[0.95rem] border border-[#c9bfaa] text-[#2f2924]", sectionPadding]} style="background: linear-gradient(135deg, rgba(255,255,255,0.96) 0%, rgba(210,183,166,0.15) 100%);">
-          <div class="flex items-center gap-2 text-[1.5rem] font-semibold tracking-[-0.02em] text-[#6e6054]">
-            <img src={topTipIcon} alt="" aria-hidden="true" class="w-auto shrink-0" style="height:1.1em;" />
-            <p class="leading-none">{wrapUp.finalTipTitle}</p>
-          </div>
-          <p class="mt-4 text-[1.125rem] leading-8 text-[#4e4741]">{wrapUp.finalTipIntro}</p>
-          <ul class="mt-4 list-disc space-y-2 pl-5 text-[1.125rem] leading-8 text-[#4e4741] marker:text-[#605248]">
-            {wrapUp.finalTipQuestions.map((question) => <li>{question}</li>)}
-          </ul>
-          <p class="mt-4 text-[18px] font-bold leading-8 text-[#4e4741]">{wrapUp.finalTipClose}</p>
-        </article>
+            <div class="px-4 py-5 md:px-8 md:py-8 lg:px-10">
+              <div class="space-y-4">
+                <article class="p-3 md:p-5 lg:p-6">
+                  <div class="lg:grid lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.58fr)] lg:items-center lg:gap-10">
+                    <div class="lg:flex lg:max-w-[34rem] lg:flex-col lg:justify-center">
+                      <p class="flex flex-wrap items-baseline gap-x-2 gap-y-1 text-[1.125rem] font-semibold uppercase leading-[1.25] tracking-[0.18em] text-[#8f7968]">
+                        <span class="shrink-0">{lesson.lesson} -</span>
+                        <span class="md:whitespace-nowrap">{lesson.title}</span>
+                      </p>
+                      <p class="mt-3 text-[1.5rem] font-semibold leading-[1.2] tracking-[-0.02em] text-[#2f2924] md:text-[2.1875rem]">{stripNumbering(lesson.productName)}</p>
 
-        <article class:list={["rounded-[0.95rem] border border-transparent text-white", sectionPadding]} style="background: linear-gradient(135deg, #8d7260 0%, #d2b7a6 100%);">
-          <h3 class="text-[1.8rem] font-semibold leading-[1.2] tracking-[-0.03em] md:text-[2.2rem]">You're ready.</h3>
-          <p class="mt-4 max-w-[54rem] text-[1.125rem] leading-8 text-white/95">{wrapUp.closing}</p>
-          <div id="download" class="mt-6 inline-flex rounded-full border border-white/25 bg-white/12 px-5 py-3 text-sm font-semibold tracking-[0.02em] text-white">
-            {wrapUp.downloadLabel}
-          </div>
-        </article>
+                      {lesson.looksLike && <p class="mt-4 text-[1.125rem] leading-8 text-[#504841]">{lesson.looksLike}</p>}
+                    </div>
+
+                    {lesson.productImages?.length ? (
+                      <div class="mt-4 grid grid-cols-2 gap-3 md:mt-5 md:gap-5 lg:mt-0 lg:gap-7">
+                        {lesson.productImages.map((productImage, index) => (
+                          <div class="aspect-square w-full overflow-hidden rounded-[0.8rem] bg-[#f6f2ee]">
+                            <img src={productImage.src} alt={`${lesson.title} product image ${index + 1}`} class="h-full w-full object-cover" />
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <div class="mt-4 overflow-hidden rounded-[0.8rem] bg-[#f6f2ee] md:mt-5 lg:mt-0">
+                        <img src={softProduct(lesson.theme.accent, lesson.theme.soft, lesson.theme.deep, lesson.visual)} alt={`${lesson.title} visual`} class="h-full w-full object-cover" />
+                      </div>
+                    )}
+                  </div>
+                </article>
+
+                <article class="rounded-[0.95rem] border border-[#e7dfd8] bg-white p-4 md:p-5">
+                    <h3 class="mt-3 text-[1.5rem] font-semibold tracking-[-0.02em] text-[#2f2924]">{stripNumbering(lesson.overviewHeading)}</h3>
+                    <div class="mt-4 space-y-4 text-[1.125rem] leading-8 text-[#4e4741]">
+                      {lesson.overview.map((paragraph) => <p>{paragraph}</p>)}
+                      {lesson.overviewBullets && (
+                        <ul class="list-disc space-y-2 pl-5 text-[1.125rem] leading-8 text-[#4e4741] marker:text-[#605248]">
+                          {lesson.overviewBullets.map((bullet) => <li>{withBulletPeriod(bullet)}</li>)}
+                        </ul>
+                      )}
+                      {lesson.overviewExtraParagraphs?.map((paragraph) => <p>{paragraph}</p>)}
+                    </div>
+                </article>
+
+                <div class="grid gap-4 md:grid-cols-2">
+                  {(() => {
+                    const lessonSections = getRegularSectionsAfterOverview(lesson);
+                    const lessonSectionSpanClasses = getSectionSpanClasses(lessonSections);
+
+                    return lessonSections.map((section, index) => (
+                      <article class={`rounded-[0.95rem] bg-white/50 p-4 shadow-[0_10px_24px_rgba(56,39,27,0.035)] md:p-5 ${lessonSectionSpanClasses[index]}`}>
+                        {section.heading && <h3 class="text-[1.5rem] font-semibold tracking-[-0.02em] text-[#2f2924]">{stripNumbering(section.heading)}</h3>}
+                        {section.label && !section.heading && <p class="text-[1.5rem] font-semibold tracking-[-0.02em] text-[#2f2924]">{section.label}</p>}
+                        {section.label && section.heading && <p class="mt-3 text-[1.125rem] text-[#4e4741]">{section.label}</p>}
+                        {section.paragraph && <p class="mt-4 text-[1.125rem] leading-8 text-[#4e4741]">{section.paragraph}</p>}
+
+                        {section.bullets && (
+                          <ul class="mt-4 list-disc space-y-2 pl-5 text-[1.125rem] leading-8 text-[#4e4741] marker:text-[#605248]">
+                            {section.bullets.map((bullet) => <li>{withBulletPeriod(bullet)}</li>)}
+                          </ul>
+                        )}
+
+                        {section.subsections && (
+                          <div class="mt-4 grid gap-4 md:grid-cols-2">
+                            {section.subsections.map((subsection) => (
+                              <div class="rounded-[0.8rem] bg-white/50 p-3 shadow-[0_8px_18px_rgba(56,39,27,0.03)] md:p-4">
+                                {subsection.label && <p class="text-[1.5rem] font-semibold tracking-[-0.02em] text-[#2f2924]">{subsection.label}</p>}
+
+                                {subsection.bullets && (
+                                  <ul class="mt-2 list-disc space-y-2 pl-5 text-[1.125rem] leading-8 text-[#4e4741] marker:text-[#605248]">
+                                    {subsection.bullets.map((bullet) => <li>{withBulletPeriod(bullet)}</li>)}
+                                  </ul>
+                                )}
+
+                                {subsection.paragraph && <p class="mt-3 text-[1.125rem] leading-8 text-[#4e4741]">{subsection.paragraph}</p>}
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      </article>
+                    ));
+                  })()}
+                </div>
+
+                {(() => {
+                  const howToSellSection = getHowToSellSection(lesson);
+
+                  if (!lesson.topTip && !howToSellSection) return null;
+
+                  return (
+                    <div class="space-y-4">
+                      {howToSellSection && (
+                        <article class="rounded-[0.95rem] border border-[#c9bfaa] p-4 text-[#2f2924] md:p-5" style={`background: linear-gradient(135deg, rgba(255,255,255,0.96) 0%, ${lesson.theme.accent}26 100%);`}>
+                          <div class="flex items-center gap-2 text-[1.5rem] font-semibold tracking-[-0.02em] text-[#6e6054]">
+                            <img src={topTipIcon} alt="" aria-hidden="true" class="w-auto shrink-0" style="height:1.1em;" />
+                            <p class="leading-none">{howToSellSection.heading ? stripNumbering(howToSellSection.heading) : "How to sell"}</p>
+                          </div>
+                          {howToSellSection.label && <p class="mt-3 text-[1.125rem] text-[#4e4741]">{howToSellSection.label}</p>}
+                          {howToSellSection.paragraph && <p class="mt-4 text-[1.125rem] leading-8 text-[#4e4741]">{howToSellSection.paragraph}</p>}
+
+                          {howToSellSection.bullets && (
+                            <ul class="mt-4 list-disc space-y-2 pl-5 text-[1.125rem] leading-8 text-[#4e4741] marker:text-[#605248]">
+                              {howToSellSection.bullets.map((bullet) => <li>{withBulletPeriod(bullet)}</li>)}
+                            </ul>
+                          )}
+
+                          {howToSellSection.subsections && (
+                            <div class="mt-4 grid gap-4 md:grid-cols-2">
+                              {howToSellSection.subsections.map((subsection) => (
+                                <div class="rounded-[0.8rem] border border-[#ddd0c2] bg-transparent p-4">
+                                  {subsection.label && <p class="text-[1.5rem] font-semibold tracking-[-0.02em] text-[#2f2924]">{subsection.label}</p>}
+
+                                  {subsection.bullets && (
+                                    <ul class="mt-2 list-disc space-y-2 pl-5 text-[1.125rem] leading-8 text-[#4e4741] marker:text-[#605248]">
+                                      {subsection.bullets.map((bullet) => <li>{withBulletPeriod(bullet)}</li>)}
+                                    </ul>
+                                  )}
+
+                                  {subsection.paragraph && <p class="mt-3 text-[1.125rem] leading-8 text-[#4e4741]">{subsection.paragraph}</p>}
+                                </div>
+                              ))}
+                            </div>
+                          )}
+                        </article>
+                      )}
+
+                      {lesson.topTip && (
+                        <article class="rounded-[0.95rem] border border-[#c9bfaa] p-4 text-[#2f2924] md:p-5" style={`background: linear-gradient(135deg, rgba(255,255,255,0.96) 0%, ${lesson.theme.accent}26 100%);`}>
+                          <div class="flex items-center gap-2 text-[1.5rem] font-semibold tracking-[-0.02em] text-[#6e6054]">
+                            <img src={topTipIcon} alt="" aria-hidden="true" class="w-auto shrink-0" style="height:1.1em;" />
+                            <p class="leading-none">Top Tip</p>
+                          </div>
+                          <p class="mt-3 text-[1.125rem] leading-8 text-[#4e4741]">{lesson.topTip}</p>
+                        </article>
+                      )}
+                    </div>
+                  );
+                })()}
+
+                {(() => {
+                  const whenToRecommendSection = getWhenToRecommendSection(lesson);
+
+                  if (!whenToRecommendSection) return null;
+
+                  return (
+                    <article class="p-4 md:p-5">
+                      {whenToRecommendSection.heading && <h3 class="text-[1.5rem] font-semibold tracking-[-0.02em] text-[#2f2924]">{stripNumbering(whenToRecommendSection.heading)}</h3>}
+                      {whenToRecommendSection.label && !whenToRecommendSection.heading && <p class="text-[1.5rem] font-semibold tracking-[-0.02em] text-[#2f2924]">{whenToRecommendSection.label}</p>}
+                      {whenToRecommendSection.label && whenToRecommendSection.heading && <p class="mt-3 text-[1.125rem] text-[#4e4741]">{whenToRecommendSection.label}</p>}
+                      {whenToRecommendSection.paragraph && <p class="mt-4 text-[1.125rem] leading-8 text-[#4e4741]">{whenToRecommendSection.paragraph}</p>}
+
+                      {whenToRecommendSection.bullets && (
+                        <ul class="mt-4 list-disc space-y-2 pl-5 text-[1.125rem] leading-8 text-[#4e4741] marker:text-[#605248]">
+                          {whenToRecommendSection.bullets.map((bullet) => <li>{withBulletPeriod(bullet)}</li>)}
+                        </ul>
+                      )}
+                    </article>
+                  );
+                })()}
+
+                <article class="rounded-[0.95rem] border border-transparent p-4 text-white md:p-6" style={`background: linear-gradient(135deg, ${lesson.theme.deep} 0%, ${lesson.theme.accent} 100%);`}>
+                    <div class="grid gap-6 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:items-start">
+                      <div class="min-w-0">
+                        <p class="inline-flex rounded-full bg-white/18 px-4 py-2 text-sm font-semibold">{lesson.assessment.title}</p>
+                        <p class="mt-4 text-[1.38rem] font-semibold leading-[1.45] tracking-[-0.02em]">{lesson.assessment.scenario}</p>
+                        {lesson.assessment.scene && <p class="mt-5 text-lg font-semibold">{lesson.assessment.scene}</p>}
+                        {lesson.assessment.customerIntro && <p class="mt-3 text-[1rem] leading-8 text-white/92">{lesson.assessment.customerIntro}</p>}
+
+                        <div class="mt-5 flex items-start gap-4">
+                          <div class="avatar placeholder shrink-0">
+                            <div class="flex w-12 items-center justify-center rounded-full bg-[#2c241f] text-white">
+                              <span class="text-lg font-semibold">C</span>
+                            </div>
+                          </div>
+                          <div class="relative max-w-[32rem] rounded-[1.15rem] bg-white px-4 py-3 text-[#2a231f] before:absolute before:left-[-0.35rem] before:top-5 before:h-4 before:w-4 before:rotate-45 before:rounded-[0.15rem] before:bg-white before:content-['']">
+                            {lesson.assessment.customerQuote}
+                          </div>
+                        </div>
+
+                        <p class="mt-4 text-[1rem] leading-8 text-white/95">{lesson.assessment.goal}</p>
+                      </div>
+
+                    <div class="overflow-hidden rounded-[0.9rem] border border-white/18 bg-white/92 text-[#2a231f] shadow-[0_10px_28px_rgba(40,27,20,0.10)] lg:self-start">
+                      <div class="px-4 py-4 md:px-5 md:py-5">
+                        <div class="quiz" data-quiz>
+                          <div class="flex items-center justify-between gap-4">
+                            <p class="text-sm uppercase tracking-[0.18em] text-[#8f7968]">Knowledge check</p>
+                            <p class="quiz-progress text-sm text-[#5b4c41]"></p>
+                          </div>
+
+                          <div class="mt-4 space-y-4">
+                            {lesson.assessment.quiz.map((question, questionIndex) => (
+                              <div class={`quiz-step rounded-[0.9rem] border border-[#ebe3db] bg-[#fbf8f5] p-4 md:p-5 ${questionIndex !== 0 ? "hidden" : ""}`} data-step data-correct={question.correct}>
+                                <p class="pr-2 text-[1.05rem] font-semibold leading-7 text-[#2f2924]">
+                                  {questionIndex + 1}. {question.question}
+                                </p>
+
+                                <div class="mt-4 space-y-3">
+                                  {question.options.map((option, optionIndex) => (
+                                    <label class="flex cursor-pointer gap-3 rounded-[0.8rem] border border-[#efe6df] bg-white px-4 py-3 text-sm leading-6 text-[#4d433d] transition hover:border-[#d5c3b7] hover:bg-[#fcfaf8]">
+                                      <input type="radio" name={`${lesson.id}-q${questionIndex}`} value={optionIndex} class="radio radio-sm mt-1 border-[#9f866f] text-[#9f866f] checked:bg-[#9f866f] checked:text-[#9f866f]" />
+                                      <span>{option}</span>
+                                    </label>
+                                  ))}
+                                </div>
+
+                                <p class="quiz-feedback mt-4 hidden rounded-[0.8rem] bg-[#f5efe9] px-4 py-3 text-sm leading-6 text-[#4b4039]"></p>
+                              </div>
+                            ))}
+                          </div>
+
+                          <div class="mt-5 flex flex-wrap items-center gap-3">
+                            <button type="button" class="quiz-prev btn h-auto min-h-0 rounded-full border border-[#d8cbc0] bg-white px-5 py-3 text-[#2b2420] shadow-none hover:bg-[#faf7f4]">Previous</button>
+                            <button type="button" class="quiz-check btn h-auto min-h-0 rounded-full border-none bg-[#2b2420] px-5 py-3 text-white shadow-none hover:bg-black">Check this question</button>
+                            <button type="button" class="quiz-next btn h-auto min-h-0 rounded-full border-none bg-[#2b2420] px-5 py-3 text-white shadow-none hover:bg-black">Next</button>
+                            <button type="button" class="quiz-reset btn h-auto min-h-0 rounded-full border border-[#d8cbc0] bg-white px-5 py-3 text-[#2b2420] shadow-none hover:bg-[#faf7f4]">Reset</button>
+                            <p class="quiz-result text-sm text-[#5b4c41]">Choose an answer, then check the question.</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </section>
+        ))}
       </section>
     </main>
 
@@ -155,18 +714,138 @@ const sectionPadding = "px-4 py-5 md:px-8 md:py-8 lg:px-10";
       const mobileNavs = document.querySelectorAll('[data-mobile-nav]');
 
       document.addEventListener('click', (event) => {
-        mobileNavs.forEach((nav) => {
-          if (!nav.contains(event.target)) {
-            nav.removeAttribute('open');
+        mobileNavs.forEach((menu) => {
+          if (!menu.contains(event.target)) {
+            menu.removeAttribute('open');
           }
         });
       });
 
-      document.querySelectorAll('[data-mobile-nav-link]').forEach((link) => {
-        link.addEventListener('click', () => {
-          const parentNav = link.closest('[data-mobile-nav]');
-          parentNav?.removeAttribute('open');
+      mobileNavs.forEach((menu) => {
+        menu.querySelectorAll('[data-mobile-nav-link]').forEach((link) => {
+          link.addEventListener('click', () => {
+            menu.removeAttribute('open');
+          });
         });
+      });
+
+      const quizzes = document.querySelectorAll('[data-quiz]');
+
+      quizzes.forEach((quiz) => {
+        const steps = Array.from(quiz.querySelectorAll('[data-step]'));
+        const progress = quiz.querySelector('.quiz-progress');
+        const prevButton = quiz.querySelector('.quiz-prev');
+        const nextButton = quiz.querySelector('.quiz-next');
+        const checkButton = quiz.querySelector('.quiz-check');
+        const resetButton = quiz.querySelector('.quiz-reset');
+        const result = quiz.querySelector('.quiz-result');
+
+        let current = 0;
+
+        const updateView = () => {
+          steps.forEach((step, index) => {
+            step.classList.toggle('hidden', index !== current);
+          });
+
+          if (progress) {
+            progress.textContent = `Question ${current + 1} of ${steps.length}`;
+          }
+
+          if (prevButton) {
+            prevButton.disabled = current === 0;
+            prevButton.classList.toggle('opacity-50', current === 0);
+            prevButton.classList.toggle('pointer-events-none', current === 0);
+          }
+
+          if (nextButton) {
+            nextButton.textContent = current === steps.length - 1 ? 'Finish review' : 'Next';
+          }
+        };
+
+        const checkCurrentQuestion = () => {
+          const step = steps[current];
+          const selected = step.querySelector('input[type="radio"]:checked');
+          const feedback = step.querySelector('.quiz-feedback');
+          const correct = step.dataset.correct;
+
+          step.classList.remove('ring-2', 'ring-[#b19a84]', 'ring-red-200');
+
+          if (!selected) {
+            if (feedback) {
+              feedback.textContent = 'Select an answer first.';
+              feedback.classList.remove('hidden');
+            }
+            if (result) {
+              result.textContent = 'Select an answer first.';
+            }
+            return;
+          }
+
+          const isCorrect = selected.value === correct;
+
+          if (feedback) {
+            feedback.textContent = isCorrect ? 'Correct.' : 'Incorrect.';
+            feedback.classList.remove('hidden');
+          }
+
+          if (isCorrect) {
+            step.classList.add('ring-2', 'ring-[#b19a84]');
+            if (result) {
+              result.textContent = 'Correct.';
+            }
+          } else {
+            step.classList.add('ring-2', 'ring-red-200');
+            if (result) {
+              result.textContent = 'Incorrect.';
+            }
+          }
+        };
+
+        const resetQuiz = () => {
+          current = 0;
+
+          steps.forEach((step) => {
+            step.querySelectorAll('input[type="radio"]').forEach((input) => {
+              input.checked = false;
+            });
+
+            step.classList.remove('ring-2', 'ring-[#b19a84]', 'ring-red-200');
+
+            const feedback = step.querySelector('.quiz-feedback');
+            if (feedback) {
+              feedback.textContent = '';
+              feedback.classList.add('hidden');
+            }
+          });
+
+          if (result) {
+            result.textContent = 'Choose an answer, then check the question.';
+          }
+
+          updateView();
+        };
+
+        checkButton?.addEventListener('click', checkCurrentQuestion);
+
+        nextButton?.addEventListener('click', () => {
+          if (current < steps.length - 1) {
+            current += 1;
+            updateView();
+          } else if (result) {
+            result.textContent = 'You have reached the end of this quiz.';
+          }
+        });
+
+        prevButton?.addEventListener('click', () => {
+          if (current > 0) {
+            current -= 1;
+            updateView();
+          }
+        });
+
+        resetButton?.addEventListener('click', resetQuiz);
+
+        updateView();
       });
     </script>
   </body>
