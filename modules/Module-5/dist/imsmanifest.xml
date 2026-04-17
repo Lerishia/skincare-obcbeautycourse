@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest
+  identifier="module-5"
+  version="1.0"
+  xmlns="http://www.imsproject.org/xsd/imscp_rootv1p1p2"
+  xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_rootv1p2"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="
+    http://www.imsproject.org/xsd/imscp_rootv1p1p2 imscp_rootv1p1p2.xsd
+    http://www.adlnet.org/xsd/adlcp_rootv1p2 adlcp_rootv1p2.xsd">
+
+  <metadata>
+    <schema>ADL SCORM</schema>
+    <schemaversion>1.2</schemaversion>
+  </metadata>
+
+  <organizations default="ORG-1">
+    <organization identifier="ORG-1">
+      <title>eLearning</title>
+      <item identifier="ITEM-1" identifierref="RES-1" isvisible="true">
+        <title>eLearning</title>
+      </item>
+    </organization>
+  </organizations>
+
+  <resources>
+    <resource
+      identifier="RES-1"
+      type="webcontent"
+      adlcp:scormtype="sco"
+      href="index.html">
+      <file href="_astro/brightening-serum-1.DRg9HTX_.jpg" />
+      <file href="_astro/brightening-serum-2.BHCDS_yO.jpg" />
+      <file href="_astro/hydrating-serum-1.DuLCoOb4.jpg" />
+      <file href="_astro/hydrating-serum-2.DWaH7mm6.jpg" />
+      <file href="_astro/index@_@astro.aD7q-Fhu.css" />
+      <file href="_astro/lesson-1-banner-inage.ZBfIXsfy.jpg" />
+      <file href="_astro/lesson-2-banner-inage.OzMdF2F_.jpg" />
+      <file href="_astro/serum-hero.BKgdU5hq.jpg" />
+      <file href="favicon.ico" />
+      <file href="favicon.svg" />
+      <file href="index.html" />
+      <file href="scorm/scorm-runtime.js" />
+      <file href="tfg-quick-course/index.html" />
+    </resource>
+  </resources>
+</manifest>

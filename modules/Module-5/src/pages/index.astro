@@ -1,12 +1,12 @@
 ---
 import "../styles/global.css";
-import courseHero from "../images/mod_5_eyes_hero.jpg";
-import primerProductImage1 from "../images/product-eye-liner-21jpg.jpg";
-import primerProductImage2 from "../images/product-eye-liner-2.jpg";
+import courseHero from "../images/serum-hero.jpg";
+import primerProductImage1 from "../images/hydrating-serum-1.jpg";
+import primerProductImage2 from "../images/hydrating-serum-2.jpg";
 import lesson1BannerImage from "../images/lesson-1-banner-inage.jpg";
-import correctorProductImage1 from "../images/product-mascara-1.jpg";
-import correctorProductImage2 from "../images/product-mascara-2.jpg";
-import correctorBannerImage from "../images/lesson-2-banner.jpg";
+import correctorProductImage1 from "../images/brightening-serum-1.jpg";
+import correctorProductImage2 from "../images/brightening-serum-2.jpg";
+import correctorBannerImage from "../images/lesson-2-banner-inage.jpg";
 import topTipIcon from "../images/top-tip.svg?url";
 
 function stripNumbering(text) {
@@ -28,6 +28,29 @@ function withBulletPeriod(text) {
   if (/[.!?:]$/.test(core)) return trimmed;
   if (core.endsWith(",")) return `${core.slice(0, -1)}.${trailingQuote}`;
   return `${core}.${trailingQuote}`;
+}
+
+function getQuizQuestionParts(text) {
+  if (!text) return { context: "", prompt: "" };
+
+  const normalized = text
+    .replace(/^\d+\.\s*/, "")
+    .replace(/^Decision \d+:\s*/i, "")
+    .trim();
+
+  const delimiterMatches = [". ", "? ", ": "]
+    .map((delimiter) => ({ delimiter, index: normalized.lastIndexOf(delimiter) }))
+    .filter(({ index }) => index !== -1)
+    .sort((a, b) => b.index - a.index);
+
+  if (!delimiterMatches.length) return { context: "", prompt: normalized };
+
+  const { delimiter, index } = delimiterMatches[0];
+  const context = normalized.slice(0, index + delimiter.length - 1).trim();
+  const prompt = normalized.slice(index + delimiter.length).trim();
+
+  if (!context || !prompt) return { context: "", prompt: normalized };
+  return { context, prompt };
 }
 
 function isHowToSellSection(section) {
@@ -650,7 +673,7 @@ const lessons = [
                         <p class="inline-flex rounded-full bg-white/18 px-4 py-2 text-sm font-semibold">{lesson.assessment.title}</p>
                         <p class="mt-4 text-[1.38rem] font-semibold leading-[1.45] tracking-[-0.02em]">{lesson.assessment.scenario}</p>
                         {lesson.assessment.scene && <p class="mt-5 text-lg font-semibold">{lesson.assessment.scene}</p>}
-                        {lesson.assessment.customerIntro && <p class="mt-3 text-[1rem] leading-8 text-white/92">{lesson.assessment.customerIntro}</p>}
+                        {lesson.assessment.customerIntro && <p class="mt-3 text-[1.125rem] leading-8 text-white/92">{lesson.assessment.customerIntro}</p>}
 
                         <div class="mt-5 flex items-start gap-4">
                           <div class="avatar placeholder shrink-0">
@@ -658,12 +681,12 @@ const lessons = [
                               <span class="text-lg font-semibold">C</span>
                             </div>
                           </div>
-                          <div class="relative max-w-[32rem] rounded-[1.15rem] bg-white px-4 py-3 text-[#2a231f] before:absolute before:left-[-0.35rem] before:top-5 before:h-4 before:w-4 before:rotate-45 before:rounded-[0.15rem] before:bg-white before:content-['']">
+                          <div class="relative max-w-[32rem] rounded-[1.15rem] bg-white px-4 py-3 text-[1.125rem] leading-8 text-[#2a231f] before:absolute before:left-[-0.35rem] before:top-5 before:h-4 before:w-4 before:rotate-45 before:rounded-[0.15rem] before:bg-white before:content-['']">
                             {lesson.assessment.customerQuote}
                           </div>
                         </div>
 
-                        <p class="mt-4 text-[1rem] leading-8 text-white/95">{lesson.assessment.goal}</p>
+                        <p class="mt-4 text-[1.125rem] leading-8 text-white/95">{lesson.assessment.goal}</p>
                       </div>
 
                     <div class="overflow-hidden rounded-[0.9rem] border border-white/18 bg-white/92 text-[#2a231f] shadow-[0_10px_28px_rgba(40,27,20,0.10)] lg:self-start">
@@ -675,11 +698,15 @@ const lessons = [
                           </div>
 
                           <div class="mt-4 space-y-4">
-                            {lesson.assessment.quiz.map((question, questionIndex) => (
+                            {lesson.assessment.quiz.map((question, questionIndex) => {
+                              const questionParts = getQuizQuestionParts(question.question);
+
+                              return (
                               <div class={`quiz-step rounded-[0.9rem] border border-[#ebe3db] bg-[#fbf8f5] p-4 md:p-5 ${questionIndex !== 0 ? "hidden" : ""}`} data-step data-correct={question.correct}>
-                                <p class="pr-2 text-[1.05rem] font-semibold leading-7 text-[#2f2924]">
-                                  {questionIndex + 1}. {question.question}
-                                </p>
+                                <div class="pr-2 space-y-1 text-[1.05rem] font-semibold leading-7 text-[#2f2924]">
+                                  {questionParts.context && <p>{questionParts.context}</p>}
+                                  <p>{questionParts.prompt}</p>
+                                </div>
 
                                 <div class="mt-4 space-y-3">
                                   {question.options.map((option, optionIndex) => (
@@ -692,15 +719,15 @@ const lessons = [
 
                                 <p class="quiz-feedback mt-4 hidden rounded-[0.8rem] bg-[#f5efe9] px-4 py-3 text-sm leading-6 text-[#4b4039]"></p>
                               </div>
-                            ))}
+                            )})}
                           </div>
 
                           <div class="mt-5 flex flex-wrap items-center gap-3">
                             <button type="button" class="quiz-prev btn h-auto min-h-0 rounded-full border border-[#d8cbc0] bg-white px-5 py-3 text-[#2b2420] shadow-none hover:bg-[#faf7f4]">Previous</button>
-                            <button type="button" class="quiz-check btn h-auto min-h-0 rounded-full border-none bg-[#2b2420] px-5 py-3 text-white shadow-none hover:bg-black">Check this question</button>
+                            <button type="button" class="quiz-check btn h-auto min-h-0 rounded-full border-none bg-[#2b2420] px-5 py-3 text-white shadow-none hover:bg-black">Submit</button>
                             <button type="button" class="quiz-next btn h-auto min-h-0 rounded-full border-none bg-[#2b2420] px-5 py-3 text-white shadow-none hover:bg-black">Next</button>
                             <button type="button" class="quiz-reset btn h-auto min-h-0 rounded-full border border-[#d8cbc0] bg-white px-5 py-3 text-[#2b2420] shadow-none hover:bg-[#faf7f4]">Reset</button>
-                            <p class="quiz-result text-sm text-[#5b4c41]">Choose an answer, then check the question.</p>
+                            <p class="quiz-result text-sm text-[#5b4c41]">Choose an answer, then click Submit.</p>
                           </div>
                         </div>
                       </div>
@@ -823,7 +850,7 @@ const lessons = [
           });
 
           if (result) {
-            result.textContent = 'Choose an answer, then check the question.';
+            result.textContent = 'Choose an answer, then click Submit.';
           }
 
           updateView();

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest
+  identifier="module-2"
+  version="1.0"
+  xmlns="http://www.imsproject.org/xsd/imscp_rootv1p1p2"
+  xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_rootv1p2"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="
+    http://www.imsproject.org/xsd/imscp_rootv1p1p2 imscp_rootv1p1p2.xsd
+    http://www.adlnet.org/xsd/adlcp_rootv1p2 adlcp_rootv1p2.xsd">
+
+  <metadata>
+    <schema>ADL SCORM</schema>
+    <schemaversion>1.2</schemaversion>
+  </metadata>
+
+  <organizations default="ORG-1">
+    <organization identifier="ORG-1">
+      <title>eLearning</title>
+      <item identifier="ITEM-1" identifierref="RES-1" isvisible="true">
+        <title>eLearning</title>
+      </item>
+    </organization>
+  </organizations>
+
+  <resources>
+    <resource
+      identifier="RES-1"
+      type="webcontent"
+      adlcp:scormtype="sco"
+      href="index.html">
+      <file href="_astro/Hydrating-cream-cleanser-1.CuPlJGCx.jpg" />
+      <file href="_astro/Hydrating-cream-cleanser-2.-WhMAorm.jpg" />
+      <file href="_astro/hero-image.BEY5AYK4.jpg" />
+      <file href="_astro/index@_@astro.qYrB--rt.css" />
+      <file href="_astro/lesson-1-banner-inage.CcofF8Ox.jpg" />
+      <file href="_astro/lesson-2-banner-inage.DrxuKqhX.jpg" />
+      <file href="_astro/lesson-3-banner-inage.iP0-rA2N.jpg" />
+      <file href="_astro/pre-cleanse-1.D_bk5fuK.jpg" />
+      <file href="_astro/pre-cleanse-2.CSuaf5cF.jpg" />
+      <file href="_astro/purifying-cleanser-1.BnHX1aSn.jpg" />
+      <file href="_astro/purifying-cleanser-2.CQizGqn1.jpg" />
+      <file href="favicon.ico" />
+      <file href="favicon.svg" />
+      <file href="index.html" />
+      <file href="scorm/scorm-runtime.js" />
+      <file href="tfg-quick-course/index.html" />
+    </resource>
+  </resources>
+</manifest>
